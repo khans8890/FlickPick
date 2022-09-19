@@ -116,7 +116,7 @@ let actionCount = 0;
     for(const answChoice5 of answChoices5){
       if(answChoice5.checked) {
         answChoice5.id == 'romance-5'? romanceCount++: answChoice5.id == 'comedy-5'? comedyCount++: 
-      answChoice5.id == 'horror-5'? horrorCount++: 
+       answChoice5.id == 'horror-5'? horrorCount++: 
       actionCount++;
         console.log(romanceCount);
         console.log(comedyCount);
