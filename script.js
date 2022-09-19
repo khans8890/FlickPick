@@ -140,7 +140,7 @@ let genreId = 0;
     let genreCount = Math.max(...countArr)
     //check for the genre
     //but order of ternary dictates output of 1st if tie occurs
-    console.log(romanceCount === genreCount ? "Romance" : comedyCount == genreCount ? "Comedy" : horrorCount == genreCount ? "Horror" : actionCount == genreCount ? "Action" : "error")
+    // console.log(romanceCount === genreCount ? "Romance" : comedyCount == genreCount ? "Comedy" : horrorCount == genreCount ? "Horror" : actionCount == genreCount ? "Action" : "error")
     console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount == genreCount ? genreId = 35 : horrorCount == genreCount ? genreId = 27 ? actionCount == genreCount : genreId = 28 : "error")
     //Romance Section
     if(romanceCount === genreCount && comedyCount === genreCount){
@@ -197,7 +197,7 @@ let genreId = 0;
 // {"ids":27,"name":"Horror"},
 // {"ids":10749,"name":"Romance"}
 
-  // }
+
 
   // nextFive.addEventListener('click', () => {
   //   let selectedGenre;
