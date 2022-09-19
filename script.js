@@ -125,6 +125,7 @@ let actionCount = 0;
         break;
       }
     }
+    q5Contain.style.display = "none";
   })
 
   // nextFive.addEventListener('click', () => {
