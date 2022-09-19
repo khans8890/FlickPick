@@ -10,6 +10,9 @@ const q2Contain = document.getElementById('q-2-container');
 const q3Contain = document.getElementById('q-3-container');
 const q4Contain = document.getElementById('q-4-container');
 const q5Contain = document.getElementById('q-5-container');
+const q6Contain = document.getElementById('q-6-container');
+const nextSix = document.getElementById('next-6');
+
 const cells = document.querySelectorAll('.cell');
 const cellsTwo = document.querySelectorAll('.cell-q2');
 const cellsThree = document.querySelectorAll('.cell-q3');
@@ -20,11 +23,13 @@ const nextTwo = document.getElementById('next-2');
 const nextThree = document.getElementById('next-3');
 const nextFour = document.getElementById('next-4');
 const nextFive = document.getElementById('next-5');
+
 let answChoices1 = document.querySelectorAll('input[name="choice-1"]');
 let answChoices2 = document.querySelectorAll('input[name="choice-2"]');
 let answChoices3 = document.querySelectorAll('input[name="choice-3"]');
 let answChoices4 = document.querySelectorAll('input[name="choice-4"]');
 let answChoices5 = document.querySelectorAll('input[name="choice-5"]');
+let answChoices6 = document.querySelectorAll('input[name="choice-6"]');
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -33,6 +38,7 @@ window.addEventListener('DOMContentLoaded', () => {
   q3Contain.style.display = "none";
   q4Contain.style.display = "none";
   q5Contain.style.display = "none";
+  q6Contain.style.display = "none";
 })
 
 // Variables
@@ -40,6 +46,8 @@ let romanceCount = 0;
 let comedyCount = 0;
 let horrorCount = 0; 
 let actionCount = 0;
+let countArr = [];
+let genreId = 0;
 
 
 // Event Listener to Start Quiz
@@ -125,14 +133,51 @@ let actionCount = 0;
         break;
       }
     }
-    q5Contain.style.display = "none";
+    countArr.push(romanceCount,comedyCount,horrorCount,actionCount)
+    countArr = countArr.filter(num => num === Math.max(romanceCount,comedyCount,horrorCount,actionCount))
+    console.log(countArr)
+    if(countArr.length > 1){
+      console.log("Break this Tie")
+      q5Contain.style.display = "none";
+      q6Contain.style.display = "block";
+    }
   })
+    //find highest 
+    //tie appears with count in the max
+    //idea using Arr and filter
+    // countArr.push(romanceCount,comedyCount,horrorCount,actionCount)
+    // countArr = countArr.filter(num => num === Math.max(romanceCount,comedyCount,horrorCount,actionCount))
+    // console.log(countArr)
+    // if(countArr.length > 1){
+    //   console.log("Break this Tie")
+
+  // nextSix.addEventListener('click', (e) => {
+  //   e.preventDefault();
+  //   for(const answChoice6 of answChoices6){
+  //     if(answChoice6.checked) {
+  //       answChoice6.id == 'romance-6'? romanceCount++: answChoice6.id == 'comedy-6'? comedyCount++: 
+  //      answChoice6.id == 'horror-6'? horrorCount++: 
+  //     actionCount++;
+  //       console.log(romanceCount);
+  //       console.log(comedyCount);
+  //       console.log(horrorCount);
+  //       console.log(actionCount);
+  //       break;
+  //     } 
+  //   }
+  //   let genreCount = Math.max(...countArr)
+  //   //check for the genre
+  //   //but order of ternary dictates output of 1st if tie occurs
+  //   console.log(romanceCount === genreCount ? "Romance" : comedyCount == genreCount ? "Comedy" : horrorCount == genreCount ? "Horror" : actionCount == genreCount ? "Action" : "Tie")
+  // }
 
   // nextFive.addEventListener('click', () => {
   //   let selectedGenre;
   
   //   })
+  
 
+  //check tie
 
 
 
