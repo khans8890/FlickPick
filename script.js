@@ -10,6 +10,9 @@ const q2Contain = document.getElementById('q-2-container');
 const q3Contain = document.getElementById('q-3-container');
 const q4Contain = document.getElementById('q-4-container');
 const q5Contain = document.getElementById('q-5-container');
+const q6Contain = document.getElementById('q-6-container');
+const nextSix = document.getElementById('next-6');
+
 const cells = document.querySelectorAll('.cell');
 const cellsTwo = document.querySelectorAll('.cell-q2');
 const cellsThree = document.querySelectorAll('.cell-q3');
@@ -25,6 +28,7 @@ let answChoices2 = document.querySelectorAll('input[name="choice-2"]');
 let answChoices3 = document.querySelectorAll('input[name="choice-3"]');
 let answChoices4 = document.querySelectorAll('input[name="choice-4"]');
 let answChoices5 = document.querySelectorAll('input[name="choice-5"]');
+let answChoices6 = document.querySelectorAll('input[name="choice-6"]');
 
 window.addEventListener('DOMContentLoaded', () => {
   q1Contain.style.display = "none";
@@ -37,6 +41,8 @@ window.addEventListener('DOMContentLoaded', () => {
   nextThree.disabled = true;
   nextFour.disabled = true;
   nextFive.disabled = true;
+
+  q6Contain.style.display = "none";
 })
 
 // Variables
@@ -44,6 +50,8 @@ let romanceCount = 0;
 let comedyCount = 0;
 let horrorCount = 0; 
 let actionCount = 0;
+let countArr = [];
+let genreId = 0;
 
 document.getElementById('romance-1').addEventListener('click',() => nextOne.disabled = false);
 document.getElementById('comedy-1').addEventListener('click',() => nextOne.disabled = false); 
@@ -149,24 +157,89 @@ document.getElementById('action-5').addEventListener('click',() => nextFive.disa
         answChoice5.id == 'romance-5'? romanceCount++: answChoice5.id == 'comedy-5'? comedyCount++: 
        answChoice5.id == 'horror-5'? horrorCount++: 
       actionCount++;
-        console.log(romanceCount);
-        console.log(comedyCount);
-        console.log(horrorCount);
-        console.log(actionCount);
         break;
       }
     }
+    countArr.push(romanceCount,comedyCount,horrorCount,actionCount)
+    countArr = countArr.filter(num => num === Math.max(romanceCount,comedyCount,horrorCount,actionCount))
+    console.log(countArr)
+    if(countArr.length > 1){
+      console.log("Break this Tie")
+      q5Contain.style.display = "none";
+      q6Contain.style.display = "block";
+    }
+    let genreCount = Math.max(...countArr)
+    //check for the genre
+    //but order of ternary dictates output of 1st if tie occurs
+    // console.log(romanceCount === genreCount ? "Romance" : comedyCount == genreCount ? "Comedy" : horrorCount == genreCount ? "Horror" : actionCount == genreCount ? "Action" : "error")
+    console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount == genreCount ? genreId = 35 : horrorCount == genreCount ? genreId = 27 ? actionCount == genreCount : genreId = 28 : "error")
+    //Romance Section
+    if(romanceCount === genreCount && comedyCount === genreCount){
+      hide("horror-q6-container","action-q6-container")
+      //hide opposite
+    }
+    if(romanceCount === genreCount && horrorCount === genreCount){
+      hide("comedy-q6-container","action-q6-container")
+    }
+    if(romanceCount === genreCount && actionCount === genreCount){
+      hide("comedy-q6-container","horror-q6-container")
+    }
+    //Comedy
+    if(comedyCount === genreCount && horrorCount === genreCount){
+      hide("romance-q6-container","action-q6-container")
+    }
+    if(comedyCount === genreCount && actionCount === genreCount){
+      hide("romance-q6-container","horror-q6-container")
+      // console.log("Comedy","Action")
+    }
+    //Horror
+    if(horrorCount === genreCount && horrorCount === actionCount)
+      hide("romance-q6-container","comedy-q6-container")
+      // console.log("Horror","Action")​
   })
 
 
 
   
+  function hide(id1,id2) {
+    document.getElementById(id1).style.display = "none";
+    document.getElementById(id2).style.display = "none";
+  }
+
+  nextSix.addEventListener('click', (e) => {
+    e.preventDefault();
+    for(const answChoice6 of answChoices6){
+      if(answChoice6.checked) {
+        answChoice6.id == 'romance-6'? romanceCount++: answChoice6.id == 'comedy-6'? comedyCount++: 
+       answChoice6.id == 'horror-6'? horrorCount++: 
+      actionCount++;
+        console.log("Romance is",romanceCount);
+        console.log("Comedy is",comedyCount);
+        console.log("Horror is",horrorCount);
+        console.log("Action is",actionCount);
+        break;
+      } 
+    }
+    let genreCount = Math.max(romanceCount,comedyCount,horrorCount,actionCount)
+    //genre ID
+    console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount == genreCount ? genreId = 35 : horrorCount == genreCount ? genreId = 27 : genreId = 28 )
+    q6Contain.style.display = "none";
+  })
+
+ //{"ids":28,"name":"Action"},
+// {"ids":35,"name":"Comedy"},
+// {"ids":27,"name":"Horror"},
+// {"ids":10749,"name":"Romance"}
+
+
 
   // nextFive.addEventListener('click', () => {
   //   let selectedGenre;
   
   //   })
+  
 
+  //check tie
 
 
 
