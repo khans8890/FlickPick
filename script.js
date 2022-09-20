@@ -36,6 +36,11 @@ const comedyDiv = document.getElementById("comedy-q6-container")
 const horrorDiv = document.getElementById("horror-q6-container")
 const actionDiv = document.getElementById("action-q6-container")
 
+// //fetch foster and appending 
+const posterImg = document.getElementById(`poster`)
+poster.style.width = "300px"
+poster.style.height = "300px"
+
 window.addEventListener('DOMContentLoaded', () => {
   q1Contain.style.display = "none";
   q2Contain.style.display = "none";
@@ -58,6 +63,7 @@ let horrorCount = 0;
 let actionCount = 0;
 let countArr = [];
 let genreId = 0;
+let genreCount;
 
 document.getElementById('romance-1').addEventListener('click',() => nextOne.disabled = false);
 document.getElementById('comedy-1').addEventListener('click',() => nextOne.disabled = false); 
@@ -156,7 +162,7 @@ document.getElementById('action-5').addEventListener('click',() => nextFive.disa
   nextFive.addEventListener('click', (e) => {
     e.preventDefault();
     // show recommendation for a movie
-
+    
     // counting users pick
     for(const answChoice5 of answChoices5){
       if(answChoice5.checked) {
@@ -168,18 +174,23 @@ document.getElementById('action-5').addEventListener('click',() => nextFive.disa
     }
     countArr.push(romanceCount,comedyCount,horrorCount,actionCount)
     countArr = countArr.filter(num => num === Math.max(romanceCount,comedyCount,horrorCount,actionCount))
+    genreCount = Math.max(...countArr)
     console.log(countArr)
-    if(countArr.length > 1){
+    if(countArr.length === 1){
+      q5Contain.style.display = "none";
+      console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount == genreCount ? genreId = 35 : horrorCount == genreCount ? genreId = 27 : genreId = 28)
+      fetchMovie(genreId);
+    } else{
       console.log("Break this Tie")
       q5Contain.style.display = "none";
       q6Contain.style.display = "block";
     }
-    let genreCount = Math.max(...countArr)
     //check for the genre
     //but order of ternary dictates output of 1st if tie occurs
     // console.log(romanceCount === genreCount ? "Romance" : comedyCount == genreCount ? "Comedy" : horrorCount == genreCount ? "Horror" : actionCount == genreCount ? "Action" : "error")
-    console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount == genreCount ? genreId = 35 : horrorCount == genreCount ? genreId = 27 : genreId = 28)
+    
     //Romance Section 
+
     if(romanceCount === genreCount && comedyCount === genreCount){
       hide(horrorDiv, actionDiv)
       //hide opposite
@@ -199,14 +210,11 @@ document.getElementById('action-5').addEventListener('click',() => nextFive.disa
       // console.log("Comedy","Action")
     }
     //Horror
-    if(horrorCount === genreCount && horrorCount === actionCount)
+    if(horrorCount === genreCount && horrorCount === genreCount)
       hide(romanceDiv,comedyDiv)
       // console.log("Horror","Action")​
   })
 
-
-
-  
   function hide(id1,id2) {
     (id1).style.display = "none";
     (id2).style.display = "none";
@@ -230,52 +238,19 @@ document.getElementById('action-5').addEventListener('click',() => nextFive.disa
     //genre ID
     console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount == genreCount ? genreId = 35 : horrorCount == genreCount ? genreId = 27 : genreId = 28 )
     q6Contain.style.display = "none";
+   fetchMovie(genreId);
   })
 
- //{"ids":28,"name":"Action"},
-// {"ids":35,"name":"Comedy"},
-// {"ids":27,"name":"Horror"},
-// {"ids":10749,"name":"Romance"}
+  const requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
 
-
-
-  // nextFive.addEventListener('click', () => {
-  //   let selectedGenre;
+  function fetchMovie(genreId){
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}`,requestOptions)
+    .then(response => response.json())
+    .then(data => {console.log(data.results[0].poster_path)
+      let postPath = data.results[0].poster_path
+      posterImg.src = `https://image.tmdb.org/t/p/original${postPath}`
+  })}
   
-  //   })
-  
-
-  //check tie
-
-
-
-// const { get } = require("http");
-
-// import fetch from "node-fetch";
-// const options = {
-// 	method: 'GET',
-// 	headers: {
-// 		'X-RapidAPI-Key': '6acb566dc7msh6aa07c069428351p12fa2ejsn49fc3821deb2',
-// 		'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
-// 	}
-// };
-// async function getFilm(){
-// let fetchLink = await fetch('https://imdb8.p.rapidapi.com/title/v2/get-popular-movies-by-genre?genre=adventure&limit=1', options)
-// let fetchObj = await fetchLink.json();
-// let film = await fetchObj;
-// const getTitle = `https://www.imdb.com${film}`
-// console.log(getTitle)
-// const thor = document.getElementById("title")
-// thor.innerText = getTitle
-// }
-
-// getFilm();
-// const requestOptions = {
-//     method: 'GET',
-//     redirect: 'follow'
-//   };
-  
-//   fetch("https://api.themoviedb.org/3/movie/550?api_key=f028604464a18dd7147f53c6c663519f", requestOptions)
-//     .then(response => response.json())
-//     .then(result => console.log(result))
-//     .catch(error => console.log('error', error));
