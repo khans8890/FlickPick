@@ -126,10 +126,6 @@ let genreId = 0;
         answChoice5.id == 'romance-5'? romanceCount++: answChoice5.id == 'comedy-5'? comedyCount++: 
        answChoice5.id == 'horror-5'? horrorCount++: 
       actionCount++;
-        console.log(romanceCount);
-        console.log(comedyCount);
-        console.log(horrorCount);
-        console.log(actionCount);
         break;
       }
     }
@@ -141,35 +137,67 @@ let genreId = 0;
       q5Contain.style.display = "none";
       q6Contain.style.display = "block";
     }
+    let genreCount = Math.max(...countArr)
+    //check for the genre
+    //but order of ternary dictates output of 1st if tie occurs
+    // console.log(romanceCount === genreCount ? "Romance" : comedyCount == genreCount ? "Comedy" : horrorCount == genreCount ? "Horror" : actionCount == genreCount ? "Action" : "error")
+    console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount == genreCount ? genreId = 35 : horrorCount == genreCount ? genreId = 27 ? actionCount == genreCount : genreId = 28 : "error")
+    //Romance Section
+    if(romanceCount === genreCount && comedyCount === genreCount){
+      hide("horror-6","action-6")
+      //hide opposite
+    }
+    if(romanceCount === genreCount && horrorCount === genreCount){
+      hide("comedy-6","action-6")
+    }
+    if(romanceCount === genreCount && actionCount === genreCount){
+      hide("comedy-6","horror-6")
+    }
+    //Comedy
+    if(comedyCount === genreCount && horrorCount === genreCount){
+      hide("romance-6","action-6")
+    }
+    if(comedyCount === genreCount && actionCount === genreCount){
+      hide("romance-6","horror-6")
+      // console.log("Comedy","Action")
+    }
+    //Horror
+    if(horrorCount === genreCount && horrorCount === actionCount)
+      hide("romance-6","comedy-6")
+      // console.log("Horror","Action")​
   })
-    //find highest 
-    //tie appears with count in the max
-    //idea using Arr and filter
-    // countArr.push(romanceCount,comedyCount,horrorCount,actionCount)
-    // countArr = countArr.filter(num => num === Math.max(romanceCount,comedyCount,horrorCount,actionCount))
-    // console.log(countArr)
-    // if(countArr.length > 1){
-    //   console.log("Break this Tie")
 
-  // nextSix.addEventListener('click', (e) => {
-  //   e.preventDefault();
-  //   for(const answChoice6 of answChoices6){
-  //     if(answChoice6.checked) {
-  //       answChoice6.id == 'romance-6'? romanceCount++: answChoice6.id == 'comedy-6'? comedyCount++: 
-  //      answChoice6.id == 'horror-6'? horrorCount++: 
-  //     actionCount++;
-  //       console.log(romanceCount);
-  //       console.log(comedyCount);
-  //       console.log(horrorCount);
-  //       console.log(actionCount);
-  //       break;
-  //     } 
-  //   }
-  //   let genreCount = Math.max(...countArr)
-  //   //check for the genre
-  //   //but order of ternary dictates output of 1st if tie occurs
-  //   console.log(romanceCount === genreCount ? "Romance" : comedyCount == genreCount ? "Comedy" : horrorCount == genreCount ? "Horror" : actionCount == genreCount ? "Action" : "Tie")
-  // }
+  function hide(id1,id2) {
+    document.getElementById(id1).style.display = "none";
+    document.getElementById(id2).style.display = "none";
+  }
+
+  nextSix.addEventListener('click', (e) => {
+    e.preventDefault();
+    for(const answChoice6 of answChoices6){
+      if(answChoice6.checked) {
+        answChoice6.id == 'romance-6'? romanceCount++: answChoice6.id == 'comedy-6'? comedyCount++: 
+       answChoice6.id == 'horror-6'? horrorCount++: 
+      actionCount++;
+        console.log("Romance is",romanceCount);
+        console.log("Comedy is",comedyCount);
+        console.log("Horror is",horrorCount);
+        console.log("Action is",actionCount);
+        break;
+      } 
+    }
+    let genreCount = Math.max(romanceCount,comedyCount,horrorCount,actionCount)
+    //genre ID
+    console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount == genreCount ? genreId = 35 : horrorCount == genreCount ? genreId = 27 : genreId = 28 )
+    q6Contain.style.display = "none";
+  })
+
+ //{"ids":28,"name":"Action"},
+// {"ids":35,"name":"Comedy"},
+// {"ids":27,"name":"Horror"},
+// {"ids":10749,"name":"Romance"}
+
+
 
   // nextFive.addEventListener('click', () => {
   //   let selectedGenre;
