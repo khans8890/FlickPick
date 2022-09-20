@@ -2,7 +2,7 @@
 // const { clearLine } = require("readline");
 // const { start } = require("repl");
 
-// DOM Elements
+// DOM Elements 
 const startButton = document.getElementById('s-button');
 const introContain = document.getElementById('intro-container');
 const q1Contain = document.getElementById('q-1-container');
@@ -47,6 +47,7 @@ window.addEventListener('DOMContentLoaded', () => {
   nextThree.disabled = true;
   nextFour.disabled = true;
   nextFive.disabled = true;
+  nextSix.disabled = true;
 
   q6Contain.style.display = "none";
 })
@@ -83,6 +84,11 @@ document.getElementById('romance-5').addEventListener('click',() => nextFive.dis
 document.getElementById('comedy-5').addEventListener('click',() => nextFive.disabled = false); 
 document.getElementById('horror-5').addEventListener('click',() => nextFive.disabled = false);
 document.getElementById('action-5').addEventListener('click',() => nextFive.disabled = false);
+
+document.getElementById('romance-6').addEventListener('click',() => nextSix.disabled = false);
+document.getElementById('comedy-6').addEventListener('click',() => nextSix.disabled = false); 
+document.getElementById('horror-6').addEventListener('click',() => nextSix.disabled = false);
+document.getElementById('action-6').addEventListener('click',() => nextSix.disabled = false); 
 
 // Event Listener to Start Quiz
   startButton.addEventListener('click', (e) => {
