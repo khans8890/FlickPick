@@ -2,7 +2,7 @@
 // const { clearLine } = require("readline");
 // const { start } = require("repl");
 
-// DOM Elements
+// DOM Elements 
 const startButton = document.getElementById('s-button');
 const introContain = document.getElementById('intro-container');
 const q1Contain = document.getElementById('q-1-container');
@@ -32,12 +32,27 @@ let answChoices5 = document.querySelectorAll('input[name="choice-5"]');
 let answChoices6 = document.querySelectorAll('input[name="choice-6"]');
 
 
+// //fetch foster and appending 
+const posterImg = document.getElementById(`poster`)
+poster.style.width = "300px"
+poster.style.height = "300px"
+
 window.addEventListener('DOMContentLoaded', () => {
   q1Contain.style.display = "none";
   q2Contain.style.display = "none";
   q3Contain.style.display = "none";
   q4Contain.style.display = "none";
   q5Contain.style.display = "none";
+<<<<<<< HEAD
+=======
+  nextOne.disabled = true;
+  nextTwo.disabled = true;
+  nextThree.disabled = true;
+  nextFour.disabled = true;
+  nextFive.disabled = true;
+  nextSix.disabled = true;
+
+>>>>>>> b4c92d508930c309b1474691aa78c2a567282139
   q6Contain.style.display = "none";
 })
 
@@ -48,7 +63,13 @@ let horrorCount = 0;
 let actionCount = 0;
 let countArr = [];
 let genreId = 0;
+let genreCount;
 
+
+document.getElementById('romance-6').addEventListener('click',() => nextSix.disabled = false);
+document.getElementById('comedy-6').addEventListener('click',() => nextSix.disabled = false); 
+document.getElementById('horror-6').addEventListener('click',() => nextSix.disabled = false);
+document.getElementById('action-6').addEventListener('click',() => nextSix.disabled = false); 
 
 // Event Listener to Start Quiz
   startButton.addEventListener('click', (e) => {
@@ -119,7 +140,7 @@ let genreId = 0;
   nextFive.addEventListener('click', (e) => {
     e.preventDefault();
     // show recommendation for a movie
-
+    
     // counting users pick
     for(const answChoice5 of answChoices5){
       if(answChoice5.checked) {
@@ -135,12 +156,48 @@ let genreId = 0;
     }
     countArr.push(romanceCount,comedyCount,horrorCount,actionCount)
     countArr = countArr.filter(num => num === Math.max(romanceCount,comedyCount,horrorCount,actionCount))
+    genreCount = Math.max(...countArr)
     console.log(countArr)
-    if(countArr.length > 1){
+    if(countArr.length === 1){
+      q5Contain.style.display = "none";
+      console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount == genreCount ? genreId = 35 : horrorCount == genreCount ? genreId = 27 : genreId = 28)
+      fetchMovie(genreId);
+    } else{
       console.log("Break this Tie")
       q5Contain.style.display = "none";
       q6Contain.style.display = "block";
     }
+<<<<<<< HEAD
+=======
+    //check for the genre
+    //but order of ternary dictates output of 1st if tie occurs
+    // console.log(romanceCount === genreCount ? "Romance" : comedyCount == genreCount ? "Comedy" : horrorCount == genreCount ? "Horror" : actionCount == genreCount ? "Action" : "error")
+    
+    //Romance Section 
+
+    if(romanceCount === genreCount && comedyCount === genreCount){
+      hide(horrorDiv, actionDiv)
+      //hide opposite
+    }
+    if(romanceCount === genreCount && horrorCount === genreCount){
+      hide(comedyDiv, actionDiv)
+    }
+    if(romanceCount === genreCount && actionCount === genreCount){
+      hide(comedyDiv, actionDiv)
+    }
+    //Comedy
+    if(comedyCount === genreCount && horrorCount === genreCount){
+      hide(romanceDiv, actionDiv)
+    }
+    if(comedyCount === genreCount && actionCount === genreCount){
+      hide(romanceDiv,horrorDiv)
+      // console.log("Comedy","Action")
+    }
+    //Horror
+    if(horrorCount === genreCount && horrorCount === genreCount)
+      hide(romanceDiv,comedyDiv)
+      // console.log("Horror","Action")​
+>>>>>>> b4c92d508930c309b1474691aa78c2a567282139
   })
     //find highest 
     //tie appears with count in the max
@@ -151,6 +208,7 @@ let genreId = 0;
     // if(countArr.length > 1){
     //   console.log("Break this Tie")
 
+<<<<<<< HEAD
   // nextSix.addEventListener('click', (e) => {
   //   e.preventDefault();
   //   for(const answChoice6 of answChoices6){
@@ -211,3 +269,44 @@ let genreId = 0;
 //     .then(response => response.json())
 //     .then(result => console.log(result))
 //     .catch(error => console.log('error', error));
+=======
+  function hide(id1,id2) {
+    (id1).style.display = "none";
+    (id2).style.display = "none";
+  }
+
+  nextSix.addEventListener('click', (e) => {
+    e.preventDefault();
+    for(const answChoice6 of answChoices6){
+      if(answChoice6.checked) {
+        answChoice6.id == 'romance-6'? romanceCount++: answChoice6.id == 'comedy-6'? comedyCount++: 
+       answChoice6.id == 'horror-6'? horrorCount++: 
+      actionCount++;
+        console.log("Romance is",romanceCount);
+        console.log("Comedy is",comedyCount);
+        console.log("Horror is",horrorCount);
+        console.log("Action is",actionCount);
+        break;
+      } 
+    }
+    let genreCount = Math.max(romanceCount,comedyCount,horrorCount,actionCount)
+    //genre ID
+    console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount == genreCount ? genreId = 35 : horrorCount == genreCount ? genreId = 27 : genreId = 28 )
+    q6Contain.style.display = "none";
+   fetchMovie(genreId);
+  })
+
+  const requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+
+  function fetchMovie(genreId){
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}`,requestOptions)
+    .then(response => response.json())
+    .then(data => {console.log(data.results[0].poster_path)
+      let postPath = data.results[0].poster_path
+      posterImg.src = `https://image.tmdb.org/t/p/original${postPath}`
+  })}
+  
+>>>>>>> b4c92d508930c309b1474691aa78c2a567282139
