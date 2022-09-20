@@ -30,13 +30,18 @@ let answChoices4 = document.querySelectorAll('input[name="choice-4"]');
 let answChoices5 = document.querySelectorAll('input[name="choice-5"]');
 let answChoices6 = document.querySelectorAll('input[name="choice-6"]');
 
-
 window.addEventListener('DOMContentLoaded', () => {
   q1Contain.style.display = "none";
   q2Contain.style.display = "none";
   q3Contain.style.display = "none";
   q4Contain.style.display = "none";
   q5Contain.style.display = "none";
+  nextOne.disabled = true;
+  nextTwo.disabled = true;
+  nextThree.disabled = true;
+  nextFour.disabled = true;
+  nextFive.disabled = true;
+
   q6Contain.style.display = "none";
 })
 
@@ -48,6 +53,30 @@ let actionCount = 0;
 let countArr = [];
 let genreId = 0;
 
+document.getElementById('romance-1').addEventListener('click',() => nextOne.disabled = false);
+document.getElementById('comedy-1').addEventListener('click',() => nextOne.disabled = false); 
+document.getElementById('horror-1').addEventListener('click',() => nextOne.disabled = false);
+document.getElementById('action-1').addEventListener('click',() => nextOne.disabled = false);
+
+document.getElementById('romance-2').addEventListener('click',() => nextTwo.disabled = false);
+document.getElementById('comedy-2').addEventListener('click',() => nextTwo.disabled = false); 
+document.getElementById('horror-2').addEventListener('click',() => nextTwo.disabled = false);
+document.getElementById('action-2').addEventListener('click',() => nextTwo.disabled = false);
+
+document.getElementById('romance-3').addEventListener('click',() => nextThree.disabled = false);
+document.getElementById('comedy-3').addEventListener('click',() => nextThree.disabled = false); 
+document.getElementById('horror-3').addEventListener('click',() => nextThree.disabled = false);
+document.getElementById('action-3').addEventListener('click',() => nextThree.disabled = false); 
+
+document.getElementById('romance-4').addEventListener('click',() => nextFour.disabled = false);
+document.getElementById('comedy-4').addEventListener('click',() => nextFour.disabled = false); 
+document.getElementById('horror-4').addEventListener('click',() => nextFour.disabled = false);
+document.getElementById('action-4').addEventListener('click',() => nextFour.disabled = false);
+
+document.getElementById('romance-5').addEventListener('click',() => nextFive.disabled = false);
+document.getElementById('comedy-5').addEventListener('click',() => nextFive.disabled = false); 
+document.getElementById('horror-5').addEventListener('click',() => nextFive.disabled = false);
+document.getElementById('action-5').addEventListener('click',() => nextFive.disabled = false);
 
 // Event Listener to Start Quiz
   startButton.addEventListener('click', (e) => {
@@ -55,11 +84,12 @@ let genreId = 0;
       // hide intro container 
       introContain.style.display="none";
       // display q-1-container
-      q1Contain.style.display = "block";
+      q1Contain.style.display = "block"; 
   })
 
-  nextOne.addEventListener('click', (e) => {
-  e.preventDefault();
+  nextOne.addEventListener('click', (e) => { 
+      
+  // e.preventDefault();
   q1Contain.style.display = "none";
   q2Contain.style.display = "block";
   for(const answChoice1 of answChoices1){
@@ -67,10 +97,12 @@ let genreId = 0;
       answChoice1.id == 'romance-1'? romanceCount++: answChoice1.id == 'comedy-1'? comedyCount++: 
       answChoice1.id == 'horror-1'? horrorCount++: 
       actionCount++;
-      break;
-    }
+
+    } 
   }
-  })
+    
+   e.preventDefault();
+  }) 
 
   nextTwo.addEventListener('click', (e) => {
     e.preventDefault();
@@ -166,6 +198,9 @@ let genreId = 0;
       // console.log("Horror","Action")​
   })
 
+
+
+  
   function hide(id1,id2) {
     document.getElementById(id1).style.display = "none";
     document.getElementById(id2).style.display = "none";
