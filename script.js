@@ -56,6 +56,12 @@ let countArr = [];
 let genreId = 0;
 let genreCount;
 
+//GenreDivs
+const romanceDiv = document.getElementById("romance-q6-container")
+const comedyDiv =  document.getElementById("comedy-q6-container")
+const horrorDiv =  document.getElementById("horror-q6-container")
+const actionDiv =  document.getElementById("action-q6-container")
+
 //Working to fetch genre
 const movieTitle = document.getElementById("title")
 const posterImg = document.getElementById(`poster`)
@@ -258,6 +264,7 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
           movieData = data.results[i]
         }
       }
+      console.log(data);
       console.log(rate);
       console.log(movieData);
       let posterPath = movieData.poster_path
