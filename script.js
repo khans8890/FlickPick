@@ -202,7 +202,7 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
       hide(comedyDiv, actionDiv)
     }
     if(romanceCount === genreCount && actionCount === genreCount){
-      hide(comedyDiv, actionDiv)
+      hide(comedyDiv, horrorDiv)
     }
     //Comedy
     if(comedyCount === genreCount && horrorCount === genreCount){
@@ -213,7 +213,7 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
       // console.log("Comedy","Action")
     }
     //Horror
-    if(horrorCount === genreCount && horrorCount === genreCount)
+    if(horrorCount === genreCount && actionCount === genreCount)
       hide(romanceDiv,comedyDiv)
       // console.log("Horror","Action")​
   })
