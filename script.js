@@ -32,28 +32,19 @@ let answChoices5 = document.querySelectorAll('input[name="choice-5"]');
 let answChoices6 = document.querySelectorAll('input[name="choice-6"]');
 
 
-// //fetch foster and appending 
-const posterImg = document.getElementById(`poster`)
-poster.style.width = "300px"
-poster.style.height = "300px"
-
 window.addEventListener('DOMContentLoaded', () => {
   q1Contain.style.display = "none";
   q2Contain.style.display = "none";
   q3Contain.style.display = "none";
   q4Contain.style.display = "none";
   q5Contain.style.display = "none";
-<<<<<<< HEAD
-=======
+  q6Contain.style.display = "none";
   nextOne.disabled = true;
   nextTwo.disabled = true;
   nextThree.disabled = true;
   nextFour.disabled = true;
   nextFive.disabled = true;
   nextSix.disabled = true;
-
->>>>>>> b4c92d508930c309b1474691aa78c2a567282139
-  q6Contain.style.display = "none";
 })
 
 // Variables
@@ -65,11 +56,35 @@ let countArr = [];
 let genreId = 0;
 let genreCount;
 
+//Working to fetch genre
+const movieTitle = document.getElementById("title")
+const posterImg = document.getElementById(`poster`)
+const overviewSection = document.getElementById("overview")
 
+document.getElementById('romance-1').addEventListener('click',() => nextOne.disabled = false);
+document.getElementById('comedy-1').addEventListener('click',() => nextOne.disabled = false);
+document.getElementById('horror-1').addEventListener('click',() => nextOne.disabled = false);
+document.getElementById('action-1').addEventListener('click',() => nextOne.disabled = false);
+document.getElementById('romance-2').addEventListener('click',() => nextTwo.disabled = false);
+document.getElementById('comedy-2').addEventListener('click',() => nextTwo.disabled = false);
+document.getElementById('horror-2').addEventListener('click',() => nextTwo.disabled = false);
+document.getElementById('action-2').addEventListener('click',() => nextTwo.disabled = false);
+document.getElementById('romance-3').addEventListener('click',() => nextThree.disabled = false);
+document.getElementById('comedy-3').addEventListener('click',() => nextThree.disabled = false);
+document.getElementById('horror-3').addEventListener('click',() => nextThree.disabled = false);
+document.getElementById('action-3').addEventListener('click',() => nextThree.disabled = false);
+document.getElementById('romance-4').addEventListener('click',() => nextFour.disabled = false);
+document.getElementById('comedy-4').addEventListener('click',() => nextFour.disabled = false);
+document.getElementById('horror-4').addEventListener('click',() => nextFour.disabled = false);
+document.getElementById('action-4').addEventListener('click',() => nextFour.disabled = false);
+document.getElementById('romance-5').addEventListener('click',() => nextFive.disabled = false);
+document.getElementById('comedy-5').addEventListener('click',() => nextFive.disabled = false);
+document.getElementById('horror-5').addEventListener('click',() => nextFive.disabled = false);
+document.getElementById('action-5').addEventListener('click',() => nextFive.disabled = false);
 document.getElementById('romance-6').addEventListener('click',() => nextSix.disabled = false);
-document.getElementById('comedy-6').addEventListener('click',() => nextSix.disabled = false); 
+document.getElementById('comedy-6').addEventListener('click',() => nextSix.disabled = false);
 document.getElementById('horror-6').addEventListener('click',() => nextSix.disabled = false);
-document.getElementById('action-6').addEventListener('click',() => nextSix.disabled = false); 
+document.getElementById('action-6').addEventListener('click',() => nextSix.disabled = false);
 
 // Event Listener to Start Quiz
   startButton.addEventListener('click', (e) => {
@@ -167,8 +182,6 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
       q5Contain.style.display = "none";
       q6Contain.style.display = "block";
     }
-<<<<<<< HEAD
-=======
     //check for the genre
     //but order of ternary dictates output of 1st if tie occurs
     // console.log(romanceCount === genreCount ? "Romance" : comedyCount == genreCount ? "Comedy" : horrorCount == genreCount ? "Horror" : actionCount == genreCount ? "Action" : "error")
@@ -197,79 +210,8 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
     if(horrorCount === genreCount && horrorCount === genreCount)
       hide(romanceDiv,comedyDiv)
       // console.log("Horror","Action")​
->>>>>>> b4c92d508930c309b1474691aa78c2a567282139
   })
-    //find highest 
-    //tie appears with count in the max
-    //idea using Arr and filter
-    // countArr.push(romanceCount,comedyCount,horrorCount,actionCount)
-    // countArr = countArr.filter(num => num === Math.max(romanceCount,comedyCount,horrorCount,actionCount))
-    // console.log(countArr)
-    // if(countArr.length > 1){
-    //   console.log("Break this Tie")
 
-<<<<<<< HEAD
-  // nextSix.addEventListener('click', (e) => {
-  //   e.preventDefault();
-  //   for(const answChoice6 of answChoices6){
-  //     if(answChoice6.checked) {
-  //       answChoice6.id == 'romance-6'? romanceCount++: answChoice6.id == 'comedy-6'? comedyCount++: 
-  //      answChoice6.id == 'horror-6'? horrorCount++: 
-  //     actionCount++;
-  //       console.log(romanceCount);
-  //       console.log(comedyCount);
-  //       console.log(horrorCount);
-  //       console.log(actionCount);
-  //       break;
-  //     } 
-  //   }
-  //   let genreCount = Math.max(...countArr)
-  //   //check for the genre
-  //   //but order of ternary dictates output of 1st if tie occurs
-  //   console.log(romanceCount === genreCount ? "Romance" : comedyCount == genreCount ? "Comedy" : horrorCount == genreCount ? "Horror" : actionCount == genreCount ? "Action" : "Tie")
-  // }
-
-  // nextFive.addEventListener('click', () => {
-  //   let selectedGenre;
-  
-  //   })
-  
-
-  //check tie
-
-
-
-// const { get } = require("http");
-
-// import fetch from "node-fetch";
-// const options = {
-// 	method: 'GET',
-// 	headers: {
-// 		'X-RapidAPI-Key': '6acb566dc7msh6aa07c069428351p12fa2ejsn49fc3821deb2',
-// 		'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
-// 	}
-// };
-// async function getFilm(){
-// let fetchLink = await fetch('https://imdb8.p.rapidapi.com/title/v2/get-popular-movies-by-genre?genre=adventure&limit=1', options)
-// let fetchObj = await fetchLink.json();
-// let film = await fetchObj;
-// const getTitle = `https://www.imdb.com${film}`
-// console.log(getTitle)
-// const thor = document.getElementById("title")
-// thor.innerText = getTitle
-// }
-
-// getFilm();
-// const requestOptions = {
-//     method: 'GET',
-//     redirect: 'follow'
-//   };
-  
-//   fetch("https://api.themoviedb.org/3/movie/550?api_key=f028604464a18dd7147f53c6c663519f", requestOptions)
-//     .then(response => response.json())
-//     .then(result => console.log(result))
-//     .catch(error => console.log('error', error));
-=======
   function hide(id1,id2) {
     (id1).style.display = "none";
     (id2).style.display = "none";
@@ -302,11 +244,27 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
   };
 
   function fetchMovie(genreId){
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}`,requestOptions)
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}`, requestOptions)
     .then(response => response.json())
-    .then(data => {console.log(data.results[0].poster_path)
-      let postPath = data.results[0].poster_path
-      posterImg.src = `https://image.tmdb.org/t/p/original${postPath}`
+    .then(data => 
+    //This to fetch the highest rating and output as the 1st appearence
+    {data.results;
+      let rate = 0;
+      let movieData;  
+      for (let i = 0; i < data.results.length;i++){
+        if (data.results[i].vote_average > rate){
+          rate = data.results[i].vote_average;
+          // rate = Math.max(rate, data.results[i].vote_average);
+          movieData = data.results[i]
+        }
+      }
+      console.log(rate);
+      console.log(movieData);
+      let posterPath = movieData.poster_path
+      console.log(posterImg)
+      movieTitle.innerText = `${movieData.title} \n Rating: ${rate}`
+      posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`
+      poster.style.width = "400px"
+      poster.style.height = "500px" 
+      overviewSection.innerText = movieData.overview
   })}
-  
->>>>>>> b4c92d508930c309b1474691aa78c2a567282139
