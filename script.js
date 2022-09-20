@@ -30,6 +30,11 @@ let answChoices4 = document.querySelectorAll('input[name="choice-4"]');
 let answChoices5 = document.querySelectorAll('input[name="choice-5"]');
 let answChoices6 = document.querySelectorAll('input[name="choice-6"]');
 
+// Variables for Bonus
+const romanceDiv = document.getElementById("romance-q6-container")
+const comedyDiv = document.getElementById("comedy-q6-container")
+const horrorDiv = document.getElementById("horror-q6-container")
+const actionDiv = document.getElementById("action-q6-container")
 
 window.addEventListener('DOMContentLoaded', () => {
   q1Contain.style.display = "none";
@@ -140,35 +145,35 @@ let genreId = 0;
     //check for the genre
     //but order of ternary dictates output of 1st if tie occurs
     // console.log(romanceCount === genreCount ? "Romance" : comedyCount == genreCount ? "Comedy" : horrorCount == genreCount ? "Horror" : actionCount == genreCount ? "Action" : "error")
-    console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount == genreCount ? genreId = 35 : horrorCount == genreCount ? genreId = 27 ? actionCount == genreCount : genreId = 28 : "error")
-    //Romance Section
+    console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount == genreCount ? genreId = 35 : horrorCount == genreCount ? genreId = 27 : genreId = 28)
+    //Romance Section 
     if(romanceCount === genreCount && comedyCount === genreCount){
-      hide("horror-q6-container","action-q6-container")
+      hide(horrorDiv, actionDiv)
       //hide opposite
     }
     if(romanceCount === genreCount && horrorCount === genreCount){
-      hide("comedy-q6-container","action-q6-container")
+      hide(comedyDiv, actionDiv)
     }
     if(romanceCount === genreCount && actionCount === genreCount){
-      hide("comedy-q6-container","horror-q6-container")
+      hide(comedyDiv, actionDiv)
     }
     //Comedy
     if(comedyCount === genreCount && horrorCount === genreCount){
-      hide("romance-q6-container","action-q6-container")
+      hide(romanceDiv, actionDiv)
     }
     if(comedyCount === genreCount && actionCount === genreCount){
-      hide("romance-q6-container","horror-q6-container")
+      hide(romanceDiv,horrorDiv)
       // console.log("Comedy","Action")
     }
     //Horror
     if(horrorCount === genreCount && horrorCount === actionCount)
-      hide("romance-q6-container","comedy-q6-container")
+      hide(romanceDiv,comedyDiv)
       // console.log("Horror","Action")​
   })
 
   function hide(id1,id2) {
-    document.getElementById(id1).style.display = "none";
-    document.getElementById(id2).style.display = "none";
+    (id1).style.display = "none";
+    (id2).style.display = "none";
   }
 
   nextSix.addEventListener('click', (e) => {
