@@ -12,6 +12,10 @@ const q4Contain = document.getElementById('q-4-container');
 const q5Contain = document.getElementById('q-5-container');
 const q6Contain = document.getElementById('q-6-container');
 const nextSix = document.getElementById('next-6');
+const movieContain = document.getElementById('movie-rec-container');
+const movieRec = document.querySelectorAll(".movieRec");
+
+
 
 const cells = document.querySelectorAll('.cell');
 const cellsTwo = document.querySelectorAll('.cell-q2');
@@ -23,6 +27,14 @@ const nextTwo = document.getElementById('next-2');
 const nextThree = document.getElementById('next-3');
 const nextFour = document.getElementById('next-4');
 const nextFive = document.getElementById('next-5');
+
+const randomMovieButton = document.createElement("button")
+const randomMovie = document.getElementById('random-movie');
+const randomTitle = document.getElementById('randomTitle');
+const randomPoster = document.getElementById('randomPoster');
+const randomOverview = document.getElementById('random-overview');
+
+
 
 let answChoices1 = document.querySelectorAll('input[name="choice-1"]');
 let answChoices2 = document.querySelectorAll('input[name="choice-2"]');
@@ -54,7 +66,6 @@ let horrorCount = 0;
 let actionCount = 0;
 let countArr = [];
 let genreId = 0;
-let genreCount;
 
 //GenreDivs
 const romanceDiv = document.getElementById("romance-q6-container")
@@ -177,7 +188,7 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
     }
     countArr.push(romanceCount,comedyCount,horrorCount,actionCount)
     countArr = countArr.filter(num => num === Math.max(romanceCount,comedyCount,horrorCount,actionCount))
-    genreCount = Math.max(...countArr)
+    let genreCount = Math.max(...countArr)
     console.log(countArr)
     if(countArr.length === 1){
       q5Contain.style.display = "none";
@@ -188,31 +199,28 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
       q5Contain.style.display = "none";
       q6Contain.style.display = "block";
     }
-    //check for the genre
-    //but order of ternary dictates output of 1st if tie occurs
-    // console.log(romanceCount === genreCount ? "Romance" : comedyCount == genreCount ? "Comedy" : horrorCount == genreCount ? "Horror" : actionCount == genreCount ? "Action" : "error")
-    
-    //Romance Section 
-
+    //Romance and Comedy Tie 
     if(romanceCount === genreCount && comedyCount === genreCount){
       hide(horrorDiv, actionDiv)
       //hide opposite
     }
+    //Romance and Horror Tie 
     if(romanceCount === genreCount && horrorCount === genreCount){
       hide(comedyDiv, actionDiv)
     }
+    //Romance and Action Tie 
     if(romanceCount === genreCount && actionCount === genreCount){
       hide(comedyDiv, horrorDiv)
     }
-    //Comedy
+    //Comedy and Horror Tie 
     if(comedyCount === genreCount && horrorCount === genreCount){
       hide(romanceDiv, actionDiv)
     }
+    //Comedy and Action Tie 
     if(comedyCount === genreCount && actionCount === genreCount){
       hide(romanceDiv,horrorDiv)
-      // console.log("Comedy","Action")
     }
-    //Horror
+    //Horror and Action Tie 
     if(horrorCount === genreCount && actionCount === genreCount)
       hide(romanceDiv,comedyDiv)
       // console.log("Horror","Action")​
@@ -238,7 +246,6 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
       } 
     }
     let genreCount = Math.max(romanceCount,comedyCount,horrorCount,actionCount)
-    //genre ID
     console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount == genreCount ? genreId = 35 : horrorCount == genreCount ? genreId = 27 : genreId = 28 )
     q6Contain.style.display = "none";
    fetchMovie(genreId);
@@ -274,4 +281,34 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
       poster.style.width = "400px"
       poster.style.height = "500px" 
       overviewSection.innerText = movieData.overview
+      movieContain.append(randomMovieButton)
+      randomMovieButton.innerText = "Please Click to see a Random Movie of the same genre"
+
+      //randomMovie Display Section
+      randomMovieButton.addEventListener('click', () => {
+        console.log("The class are",movieRec)
+        for (let i = 0; i < movieRec.length; i++) {
+          movieRec[i].style.display = "none";
+        }
+        fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}`, requestOptions)
+    .then(response => response.json())
+    .then(data => 
+    {data.results;
+      console.log(data.results)
+      let randomMovie;
+      let randomAmount = Math.floor(Math.random() * data.results.length)
+      console.log(randomAmount)
+      for (let i = 0; i < randomAmount + 1 ;i++){
+        randomMovie = data.results[i]
+      }
+      console.log(randomMovie)
+      let randomPost = randomMovie.poster_path
+      randomTitle.innerText = `${randomMovie.title} \n Rating: ${randomMovie.vote_average}`
+      randomPoster.src = `https://image.tmdb.org/t/p/original${randomPost}`
+      randomPoster.style.width = "400px"
+      randomPoster.style.height = "500px" 
+      randomOverview.innerText = randomMovie.overview
+    })
+  })
   })}
+
