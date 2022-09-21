@@ -159,9 +159,7 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
   })
 
   nextFive.addEventListener('click', (e) => {
-    e.preventDefault();
-    // show recommendation for a movie
-    
+    e.preventDefault();    
     // counting users pick
     for(const answChoice5 of answChoices5){
       if(answChoice5.checked) {
@@ -181,7 +179,7 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
     console.log(countArr)
     if(countArr.length === 1){
       q5Contain.style.display = "none";
-      console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount == genreCount ? genreId = 35 : horrorCount == genreCount ? genreId = 27 : genreId = 28)
+      console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount === genreCount ? genreId = 35 : horrorCount === genreCount ? genreId = 27 : genreId = 28)
       fetchMovie(genreId);
     } else{
       console.log("Break this Tie")
@@ -239,7 +237,7 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
     }
     let genreCount = Math.max(romanceCount,comedyCount,horrorCount,actionCount)
     //genre ID
-    console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount == genreCount ? genreId = 35 : horrorCount == genreCount ? genreId = 27 : genreId = 28 )
+    console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount === genreCount ? genreId = 35 : horrorCount === genreCount ? genreId = 27 : genreId = 28 )
     q6Contain.style.display = "none";
    fetchMovie(genreId);
   })
@@ -262,6 +260,7 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
           rate = data.results[i].vote_average;
           // rate = Math.max(rate, data.results[i].vote_average);
           movieData = data.results[i]
+          fetchAvail(movieData)
         }
       }
       console.log(data);
@@ -275,3 +274,30 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
       poster.style.height = "500px" 
       overviewSection.innerText = movieData.overview
   })}
+
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': '142e4906admshce7499d95d69ec7p137cacjsne487cc68aa98',
+      'X-RapidAPI-Host': 'utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com'
+    }
+  };
+  
+  function fetchAvail(movieData){
+  fetch(`https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup?term=${movieData.title}=us`, options)
+    .then(response => response.json())
+    .then(response => console.log(response))
+    .catch(err => console.error(err))
+  };
+
+
+  // const fetch = require('node-fetch');
+
+// let url = 'https://api.watchmode.com/v1/title/345534/sources/?apiKey=YOUR_API_KEY';
+
+// fetch(url, { method: 'Get' })
+//     .then((res) => res.json())
+//     .then((json) => {
+//         console.log(json);
+//     }); 
+
