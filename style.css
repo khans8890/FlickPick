@@ -213,16 +213,11 @@ body {
     margin-left: 30px;
 }
 
-/*result page*/
 
+/*result page*/
 #movie-rec-container{
-    font-size: 25px;
-    text-align: center;
-    padding-top: 100px;
     font-family: cursive;
 }
 
-#title{
-    display: flex;
-}
+
 
