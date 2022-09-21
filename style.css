@@ -1,0 +1,228 @@
+body {
+    background: rgb(213,164,186);
+    background: radial-gradient(circle, rgba(213,164,186,1) 0%, rgba(108,170,244,1) 100%);
+}
+
+/* landing page */
+
+.start-button-container{
+    text-align: center;
+    padding-top: 50px;
+}
+
+#type-quiz {
+    font-size: 45px;
+    text-align: center; 
+    font-family: cursive;
+    padding-top: 100px;
+    font-weight: bold;
+}
+
+#headline{
+    font-size: 35px;
+    text-align: center;
+    font-family: cursive;
+    padding-top: 30px;
+    font-weight: bold;
+}
+
+#quiz-intro{
+    font-size: 35px;
+    text-align: center;
+    font-family: cursive;
+    padding-top: 20px;
+    font-weight: bold;
+}
+
+#quiz-intro-descr{
+    font-size: 35px;
+    text-align: center;
+    font-family: cursive;
+    padding-top: 30px;
+    font-weight: bold;
+}
+
+#s-button{
+    font-size: 20px;
+    
+}
+
+/*first form*/
+
+#q-1-head{
+    font-size: 35px;
+    text-align: center;
+    padding-top: 100px;
+    font-family: cursive;
+}
+
+.options{
+   font-size: 20px; 
+   margin-left: 30px;
+   font-family: cursive;
+   
+}
+
+.inputcircle {
+    margin-left: 40px;
+}
+
+#bodyinputs {
+    margin-top: 50px;
+}
+
+#next-1 {
+    margin-left: 30px;
+}
+
+/*second form */
+
+#q-2-head{
+    font-size: 35px;
+    text-align: center;
+    padding-top: 100px;
+    font-family: cursive;
+}
+
+.options2{
+    font-size: 20px; 
+   margin-left: 30px;
+   font-family: cursive;
+}
+
+.inputcircle2{
+    margin-left: 40px;
+}
+
+#bodyinputs2{
+    margin-top: 50px;
+}
+
+#next-2{
+    margin-left: 30px;
+}
+
+/*third form*/
+
+#q-3-head{
+    font-size: 35px;
+    text-align: center;
+    padding-top: 100px;
+    font-family: cursive;
+}
+
+.options3{
+    font-size: 20px; 
+   margin-left: 30px;
+   font-family: cursive;
+}
+
+.inputcircle3{
+    margin-left: 40px; 
+}
+
+#bodyinputs3{
+    margin-top: 50px;
+}
+
+#next-3{
+    margin-left: 30px;
+}
+
+/*fourth form*/
+
+#q-4-head{
+    font-size: 35px;
+    text-align: center;
+    padding-top: 100px;
+    font-family: cursive;
+}
+
+.options4{
+    font-size: 20px; 
+   margin-left: 30px;
+   font-family: cursive;
+}
+
+.inputcircles4{
+    margin-left: 40px; 
+}
+
+#bodyinputs4{
+    margin-top: 50px;
+}
+
+#next-4{
+    margin-left: 30px;
+}
+
+/*fifth form*/
+
+#q-5-head{
+    font-size: 35px;
+    text-align: center;
+    padding-top: 100px;
+    font-family: cursive;
+}
+
+.options5{
+    font-size: 20px; 
+   margin-left: 30px;
+   font-family: cursive;
+}
+
+.inputcircles5{
+    margin-left: 30px; 
+    
+}
+
+#bodyinputs5{
+    margin-top: 50px;
+    
+}
+
+#next-5{
+    margin-left: 20px;
+} 
+
+/*bonus form*/
+
+#q-6-head{
+    font-size: 35px;
+    text-align: center;
+    padding-top: 100px;
+    font-family: cursive;
+} 
+
+.options6{
+    font-size: 20px; 
+    margin-left: 30px;
+    font-family: cursive;
+}
+
+.inputcircles6{
+    margin-left: 40px; 
+}
+
+#bodyinputs6{
+    margin-top: 50px;
+    
+}
+
+#next-6{
+    margin-left: 30px;
+}
+
+/*result page*/
+
+#movie-rec-container{
+    font-size: 25px;
+    text-align: center;
+    padding-top: 100px;
+    font-family: cursive;
+}
+
+#title{
+    display: flex;
+}
+

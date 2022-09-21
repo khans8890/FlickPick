@@ -285,6 +285,14 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
       console.log(movieData);
       let posterPath = movieData.poster_path
       console.log(posterImg)
+
+      movieTitle.innerText = `${movieData.title} \n Rating: ${rate} \n ${movieData.overview}`
+      posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`
+      poster.style.width = "400px"
+      poster.style.height = "500px" 
+      // overviewSection.innerText = \n movieData.overview
+  })}
+
       movieTitle.innerText = `${movieData.title} \n Rating: ${movieData.vote_average}/10 \n Voted: ${movieData.vote_count}`
       posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`
       poster.style.width = "400px"
