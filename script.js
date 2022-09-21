@@ -255,9 +255,9 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
     method: 'GET',
     redirect: 'follow'
   };
-
   function fetchMovie(genreId){
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}`, requestOptions)
+    for(let i = 1; i <= 3;i++){
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}&page=${i}`, requestOptions)
     .then(response => response.json())
     .then(data => 
     //This to fetch the highest rating and output as the 1st appearence
@@ -276,7 +276,7 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
       console.log(movieData);
       let posterPath = movieData.poster_path
       console.log(posterImg)
-      movieTitle.innerText = `${movieData.title} \n Rating: ${rate}`
+      movieTitle.innerText = `${movieData.title} \n Rating: ${rate}/10`
       posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`
       poster.style.width = "400px"
       poster.style.height = "500px" 
@@ -290,7 +290,7 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
         for (let i = 0; i < movieRec.length; i++) {
           movieRec[i].style.display = "none";
         }
-        fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}`, requestOptions)
+        fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}&page=${i}`, requestOptions)
     .then(response => response.json())
     .then(data => 
     {data.results;
@@ -299,16 +299,17 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
       let randomAmount = Math.floor(Math.random() * data.results.length)
       console.log(randomAmount)
       for (let i = 0; i < randomAmount + 1 ;i++){
+        if(data.results[i].vote_average > 7){
         randomMovie = data.results[i]
-      }
+      }}
       console.log(randomMovie)
       let randomPost = randomMovie.poster_path
-      randomTitle.innerText = `${randomMovie.title} \n Rating: ${randomMovie.vote_average}`
+      randomTitle.innerText = `${randomMovie.title} \n Rating: ${randomMovie.vote_average}/10`
       randomPoster.src = `https://image.tmdb.org/t/p/original${randomPost}`
       randomPoster.style.width = "400px"
       randomPoster.style.height = "500px" 
       randomOverview.innerText = randomMovie.overview
     })
   })
-  })}
+  })}}
 
