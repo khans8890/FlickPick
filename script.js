@@ -251,8 +251,8 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
     console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount == genreCount ? genreId = 35 : horrorCount == genreCount ? genreId = 27 : genreId = 28 )
     q6Contain.style.display = "none";
    fetchMovie(genreId);
-   setTimeout(fetchMovie(),1000)
   })
+
   const options = {
     method: 'GET',
     headers: {
@@ -265,74 +265,79 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
     method: 'GET',
     redirect: 'follow'
   };
-  function fetchMovie(genreId){
-    let pageOfMovies = []
-    for(let page = 1; page <= 5;page++){
-  fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}&page=1`, requestOptions)
-    .then(response => response.json())
-    .then(data => 
-    //This to fetch the highest rating and output as the 1st appearence
-    {data.results;
-      let rate = 0
-      let movieData;  
-      for (let i = 0; i < data.results.length;i++){
-        if (data.results[i].vote_average > rate){
-          rate = data.results[i].vote_average
-          movieData = data.results[i]
-        }
-      }
-      console.log(pageOfMovies)
-      console.log(movieData);
-      let posterPath = movieData.poster_path
-      console.log(posterImg)
+  function fetchMovie(genreId) {
+    for (let page = 1; page <= 5; page++) {
+      //Fetching the top rated movie of page 1
+      fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}&page=1`, requestOptions)
+        .then(response => response.json())
+        .then(data =>
+        //This to fetch the highest rating and output as the 1st appearence
+        {
+          data.results;
+          let rate = 0
+          let movieData;
+          for (let i = 0; i < data.results.length; i++) {
+            if (data.results[i].vote_average > rate) {
+              rate = data.results[i].vote_average
+              movieData = data.results[i]
+            }
+          }
+          //Display Top Rate Movie
+          console.log(movieData);
+          let posterPath = movieData.poster_path
+          console.log(posterImg)
+          movieTitle.innerText = `${movieData.title} \n Rating: ${movieData.vote_average}/10 \n Voted: ${movieData.vote_count}`
+          posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`
+          poster.style.width = "400px"
+          poster.style.height = "500px"
+          overviewSection.innerText = movieData.overview
+          movieContain.append(randomMovieButton)
+          fetch(`https://youtube138.p.rapidapi.com/search/?q=${movieData.title}movie&trailer`, options).then(response => response.json()).then(data => {
+            console.log(data);
+            console.log(data.contents);
+            let videoLink = data.contents[0].video.videoId;
+            console.log(videoLink)
+            videoFrame.src = `https://www.youtube.com/embed/${videoLink}`
+          })
+          randomMovieButton.innerText = "Please Click to see a Random Movie of the same genre"
+          //randomMovie Display Section
+          randomMovieButton.addEventListener('click', () => {
+            for (let i = 0; i < movieRec.length; i++) {
+              movieRec[i].style.display = "none";
+            }
+            fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}&page=${page}`, requestOptions)
+              .then(response => response.json())
+              .then(data => {
+                data.results;
+                console.log(data.results)
+                let randomMovie;
+                let randomAmount = Math.floor(Math.random() * data.results.length)
+                console.log(randomAmount)
+                //Display the randomm movies only > 7
+                for (let i = 0; i < randomAmount + 1; i++) {
+                  if (data.results[i].vote_average > 7.0) {
+                    randomMovie = data.results[i]
+                  }
+                }
+                console.log(randomMovie)
+                let randomPost = randomMovie.poster_path
+                randomTitle.innerText = `${randomMovie.title} \n Rating: ${randomMovie.vote_average}/10 \n Voted: ${randomMovie.vote_count}`
+                randomPoster.src = `https://image.tmdb.org/t/p/original${randomPost}`
+                randomPoster.style.width = "400px"
+                randomPoster.style.height = "500px"
+                randomOverview.innerText = randomMovie.overview
+              })
+          })
+        })
+    }
+  }
 
-      movieTitle.innerText = `${movieData.title} \n Rating: ${rate} \n ${movieData.overview}`
-      posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`
-      poster.style.width = "400px"
-      poster.style.height = "500px" 
-      // overviewSection.innerText = \n movieData.overview
-  })}
-
-      movieTitle.innerText = `${movieData.title} \n Rating: ${movieData.vote_average}/10 \n Voted: ${movieData.vote_count}`
-      posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`
-      poster.style.width = "400px"
-      poster.style.height = "500px" 
-      overviewSection.innerText = movieData.overview
-      movieContain.append(randomMovieButton)
-      fetch(`https://youtube138.p.rapidapi.com/search/?q=${movieData.title}movie&trailer`, options).then(response => response.json()).then(data => 
-      {console.log(data);
-        console.log(data.contents);
-        let videoLink = data.contents[0].video.videoId;
-        console.log(videoLink)
-        videoFrame.src = `https://www.youtube.com/embed/${videoLink}`
-      })
-      randomMovieButton.innerText = "Please Click to see a Random Movie of the same genre"
-      //randomMovie Display Section
-      randomMovieButton.addEventListener('click', () => {
-
-        for (let i = 0; i < movieRec.length; i++) {
-          movieRec[i].style.display = "none";
-        }
-        fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}&page=${page}`, requestOptions)
-    .then(response => response.json())
-    .then(data => 
-    {data.results;
-      console.log(data.results)
-      let randomMovie;
-      let randomAmount = Math.floor(Math.random() * data.results.length)
-      console.log(randomAmount)
-      for (let i = 0; i < randomAmount + 1 ;i++){
-        if(data.results[i].vote_average > 7.0){
-        randomMovie = data.results[i]
-      }}
-      console.log(randomMovie)
-      let randomPost = randomMovie.poster_path
-      randomTitle.innerText = `${randomMovie.title} \n Rating: ${randomMovie.vote_average}/10 \n Voted: ${randomMovie.vote_count}`
-      randomPoster.src = `https://image.tmdb.org/t/p/original${randomPost}`
-      randomPoster.style.width = "400px"
-      randomPoster.style.height = "500px" 
-      randomOverview.innerText = randomMovie.overview
-    })
-  })
-  })}}
-
+  
+  
+  
+  
+  
+  
+  
+  
+  
