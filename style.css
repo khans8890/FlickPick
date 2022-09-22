@@ -4,8 +4,9 @@ body {
     display: grid;
     place-items: center;
     color: black;
-}
+    font-family: 'Roboto', sans-serif;
 
+}
 @keyframes changeBg {
     0% {
         background-image: url(seaBg.png);
@@ -43,7 +44,6 @@ body {
 #type-quiz {
     font-size: 45px;
     text-align: center; 
-    font-family: cursive;
     padding-top: 100px;
     font-weight: bold;
 }
@@ -59,7 +59,6 @@ body {
 #quiz-intro{
     font-size: 35px;
     text-align: center;
-    font-family: cursive;
     padding-top: 20px;
     font-weight: bold;
 }
@@ -67,7 +66,6 @@ body {
 #quiz-intro-descr{
     font-size: 35px;
     text-align: center;
-    font-family: cursive;
     padding-top: 30px;
     font-weight: bold;
 }
@@ -83,13 +81,11 @@ body {
     font-size: 35px;
     text-align: center;
     padding-top: 100px;
-    font-family: cursive;
 }
 
 .options{
    font-size: 20px; 
    margin-left: 30px;
-   font-family: cursive;
    
 }
 
@@ -117,7 +113,6 @@ body {
 .options2{
     font-size: 20px; 
    margin-left: 30px;
-   font-family: cursive;
 }
 
 .inputcircle2{
@@ -138,13 +133,11 @@ body {
     font-size: 35px;
     text-align: center;
     padding-top: 100px;
-    font-family: cursive;
 }
 
 .options3{
     font-size: 20px; 
    margin-left: 30px;
-   font-family: cursive;
 }
 
 .inputcircle3{
@@ -165,13 +158,11 @@ body {
     font-size: 35px;
     text-align: center;
     padding-top: 100px;
-    font-family: cursive;
 }
 
 .options4{
     font-size: 20px; 
    margin-left: 30px;
-   font-family: cursive;
 }
 
 .inputcircles4{
@@ -192,13 +183,11 @@ body {
     font-size: 35px;
     text-align: center;
     padding-top: 100px;
-    font-family: cursive;
 }
 
 .options5{
     font-size: 20px; 
    margin-left: 30px;
-   font-family: cursive;
 }
 
 .inputcircles5{
@@ -221,13 +210,11 @@ body {
     font-size: 35px;
     text-align: center;
     padding-top: 100px;
-    font-family: cursive;
 } 
 
 .options6{
     font-size: 20px; 
     margin-left: 30px;
-    font-family: cursive;
 }
 
 .inputcircles6{
@@ -250,4 +237,8 @@ body {
 }
 
 
+h4 {
+    padding: 0px 10px;
+    font-size: 32px;
+}
 

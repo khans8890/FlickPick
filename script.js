@@ -72,6 +72,7 @@ const overviewSection = document.getElementById("overview");
 //YT API
 const videoFrame = document.querySelector("iframe");
 
+
 document
   .getElementById("romance-1")
   .addEventListener("click", () => (nextOne.disabled = false));
@@ -163,13 +164,20 @@ nextOne.addEventListener("click", (e) => {
       answChoice1.id == "romance-1"
         ? romanceCount++
         : answChoice1.id == "comedy-1"
-        ? comedyCount++
-        : answChoice1.id == "horror-1"
-        ? horrorCount++
-        : actionCount++;
+          ? comedyCount++
+          : answChoice1.id == "horror-1"
+            ? horrorCount++
+            : actionCount++;
       break;
     }
   }
+  romanceCount === genreCount
+    ? (genreId = 10749)
+    : comedyCount == genreCount
+      ? (genreId = 35)
+      : horrorCount == genreCount
+        ? (genreId = 27)
+        : (genreId = 28)
 });
 
 nextTwo.addEventListener("click", (e) => {
@@ -181,10 +189,10 @@ nextTwo.addEventListener("click", (e) => {
       answChoice2.id == "romance-2"
         ? romanceCount++
         : answChoice2.id == "comedy-2"
-        ? comedyCount++
-        : answChoice2.id == "horror-2"
-        ? horrorCount++
-        : actionCount++;
+          ? comedyCount++
+          : answChoice2.id == "horror-2"
+            ? horrorCount++
+            : actionCount++;
       break;
     }
   }
@@ -200,10 +208,10 @@ nextThree.addEventListener("click", (e) => {
       answChoice3.id == "romance-3"
         ? romanceCount++
         : answChoice3.id == "comedy-3"
-        ? comedyCount++
-        : answChoice3.id == "horror-3"
-        ? horrorCount++
-        : actionCount++;
+          ? comedyCount++
+          : answChoice3.id == "horror-3"
+            ? horrorCount++
+            : actionCount++;
       break;
     }
   }
@@ -218,10 +226,10 @@ nextFour.addEventListener("click", (e) => {
       answChoice4.id == "romance-4"
         ? romanceCount++
         : answChoice4.id == "comedy-4"
-        ? comedyCount++
-        : answChoice4.id == "horror-4"
-        ? horrorCount++
-        : actionCount++;
+          ? comedyCount++
+          : answChoice4.id == "horror-4"
+            ? horrorCount++
+            : actionCount++;
       break;
     }
   }
@@ -237,10 +245,10 @@ nextFive.addEventListener("click", (e) => {
       answChoice5.id == "romance-5"
         ? romanceCount++
         : answChoice5.id == "comedy-5"
-        ? comedyCount++
-        : answChoice5.id == "horror-5"
-        ? horrorCount++
-        : actionCount++;
+          ? comedyCount++
+          : answChoice5.id == "horror-5"
+            ? horrorCount++
+            : actionCount++;
       console.log(romanceCount);
       console.log(comedyCount);
       console.log(horrorCount);
@@ -261,10 +269,10 @@ nextFive.addEventListener("click", (e) => {
       romanceCount === genreCount
         ? (genreId = 10749)
         : comedyCount == genreCount
-        ? (genreId = 35)
-        : horrorCount == genreCount
-        ? (genreId = 27)
-        : (genreId = 28)
+          ? (genreId = 35)
+          : horrorCount == genreCount
+            ? (genreId = 27)
+            : (genreId = 28)
     );
     fetchMovie(genreId);
   } else {
@@ -311,10 +319,10 @@ nextSix.addEventListener("click", (e) => {
       answChoice6.id == "romance-6"
         ? romanceCount++
         : answChoice6.id == "comedy-6"
-        ? comedyCount++
-        : answChoice6.id == "horror-6"
-        ? horrorCount++
-        : actionCount++;
+          ? comedyCount++
+          : answChoice6.id == "horror-6"
+            ? horrorCount++
+            : actionCount++;
       console.log("Romance is", romanceCount);
       console.log("Comedy is", comedyCount);
       console.log("Horror is", horrorCount);
@@ -332,10 +340,10 @@ nextSix.addEventListener("click", (e) => {
     romanceCount === genreCount
       ? (genreId = 10749)
       : comedyCount == genreCount
-      ? (genreId = 35)
-      : horrorCount == genreCount
-      ? (genreId = 27)
-      : (genreId = 28)
+        ? (genreId = 35)
+        : horrorCount == genreCount
+          ? (genreId = 27)
+          : (genreId = 28)
   );
   q6Contain.style.display = "none";
   fetchMovie(genreId);
@@ -374,24 +382,23 @@ async function getRandomMovie(genreId) {
           console.log(randomAmount);
           //Display the randomm movies only > 7
           for (let i = 0; i < randomAmount + 1; i++) {
-            if (data.results[i].vote_average > 7.0 && data.results[i].vote_count > 500){
+            if (data.results[i].vote_average > 7.0 && data.results[i].vote_count > 500) {
               randomMovie = data.results[i];
             }
           }
           // console.log(randomMovie);
           let randomPost = randomMovie.poster_path;
-          randomTitle.innerText = `${randomMovie.title} \n \n Rating: ${randomMovie.vote_average}/10 \n \n Voted: ${randomMovie.vote_count}`;
           randomPoster.src = `https://image.tmdb.org/t/p/original${randomPost}`;
+          randomTitle.innerText = `${randomMovie.title} \n \n Rating: ${randomMovie.vote_average}/10 \n \n Voted: ${randomMovie.vote_count} \n \n ${randomMovie.overview}`;
           randomPoster.style.width = "400px";
           randomPoster.style.height = "500px";
-          randomOverview.innerText = randomMovie.overview;
-        });
-        randomMovie.style.cssText = 
+        })
+      randomMovie.style.cssText =
         `display:flex;
-        font-size: 35px;
-        justify-content: center;
-        text-align: center;
-        font-family: cursive;
+        font-size: 16px;
+        justify-content: left;
+        text-align: left;
+        padding: 25px;
         `
     });
   }
@@ -407,49 +414,69 @@ async function fetchMovie(genreId) {
   )
     .then((response) => response.json())
     .then((data) =>
-      //This to fetch the highest rating and output as the 1st appearence
-      {
-        data.results;
-        let rate = 0;
-        let movieData;
-        for (let i = 0; i < data.results.length; i++) {
-          if (data.results[i].vote_average > rate && data.results[i].vote_count > 500) {
-            rate = data.results[i].vote_average;
-            movieData = data.results[i];
-          }
+    //This to fetch the highest rating and output as the 1st appearence
+    {
+      data.results;
+      let rate = 0;
+      let movieData;
+      for (let i = 0; i < data.results.length; i++) {
+        if (data.results[i].vote_average > rate && data.results[i].vote_count > 500) {
+          rate = data.results[i].vote_average;
+          movieData = data.results[i];
         }
-        //Display Top Rated Movie
-        console.log(movieData);
-        let posterPath = movieData.poster_path;
-        console.log(posterImg);
-        movieTitle.innerText = `${movieData.title} \n \n Rating: ${movieData.vote_average}/10 \n \n Voted: ${movieData.vote_count}`;
-        posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`;
-        poster.style.width = "400px";
-        poster.style.height = "500px";
-        overviewSection.innerText = movieData.overview;
-        movieContain.append(randomMovieButton);
-        fetch(
-          `https://youtube138.p.rapidapi.com/search/?q=${movieData.title}movie&trailer`,
-          options
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            console.log(data.contents);
-            let videoLink = data.contents[0].video.videoId;
-            console.log(videoLink);
-            videoFrame.src = `https://www.youtube.com/embed/${videoLink}`;
-          });
-          movieContain.style.cssText = 
-          `display:flex;
-          font-size: 35px;
-          justify-content: center;
-          text-align: center;
-          font-family: cursive;
-          `
-        randomMovieButton.innerText =
-          "New Flick";
       }
+      //Display Top Rate Movie
+      console.log(movieData);
+      let posterPath = movieData.poster_path;
+      console.log(posterImg);
+      posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`;
+      movieTitle.innerText = `${movieData.title} \n \n Rating: ${movieData.vote_average}/10 \n \n Voted: ${movieData.vote_count} \n \n ${movieData.overview}`;
+      poster.style.width = "400px";
+      poster.style.height = "500px";
+      movieContain.append(randomMovieButton);
+      fetch(
+        `https://youtube138.p.rapidapi.com/search/?q=${movieData.title}movie&trailer`,
+        options
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          console.log(data.contents);
+          let videoLink = data.contents[0].video.videoId;
+          console.log(videoLink);
+          videoFrame.src = `https://www.youtube.com/embed/${videoLink}`;
+        });
+      movieContain.style.cssText =
+        `display:flex;
+          font-size: 16px;
+          justify-content: left;
+          text-align: left;
+          padding: 25px;
+          `
+      randomMovieButton.innerText =
+        "Random Flick";
+      randomMovieButton.style.cssText =
+        `font-size: 12px; 
+        text-shadow:
+          0 0 7px #fff,
+          0 0 10px #fff,
+          0 0 21px #fff,
+          0 0 42px #5271ff,
+          0 0 82px #5271ff,
+          0 0 92px #5271ff,
+          0 0 102px #5271ff,
+          0 0 151px #5271ff;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        font-weight: bold;
+        width: 150px;
+        height: 50px;
+        color: black;
+        background-color: #fffdd0;  
+        border-radius: 16px;
+        cursor: pointer;
+        transition: all 0.5s ease 0s;
+        `
+    }
     );
     analysis(genreId);
 }
