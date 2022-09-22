@@ -383,12 +383,19 @@ async function getRandomMovie(genreId) {
           }
           console.log(randomMovie);
           let randomPost = randomMovie.poster_path;
-          randomTitle.innerText = `${randomMovie.title} \n Rating: ${randomMovie.vote_average}/10 \n Voted: ${randomMovie.vote_count}`;
+          randomTitle.innerText = `${randomMovie.title} \n \n Rating: ${randomMovie.vote_average}/10 \n \n Voted: ${randomMovie.vote_count}`;
           randomPoster.src = `https://image.tmdb.org/t/p/original${randomPost}`;
           randomPoster.style.width = "400px";
           randomPoster.style.height = "500px";
           randomOverview.innerText = randomMovie.overview;
         });
+        randomMovie.style.cssText = 
+        `display:flex;
+        font-size: 35px;
+        justify-content: center;
+        text-align: center;
+        font-family: cursive;
+        `
     });
   }
 }
@@ -417,7 +424,7 @@ async function fetchMovie(genreId) {
         console.log(movieData);
         let posterPath = movieData.poster_path;
         console.log(posterImg);
-        movieTitle.innerText = `${movieData.title} \n Rating: ${movieData.vote_average}/10 \n Voted: ${movieData.vote_count}`;
+        movieTitle.innerText = `${movieData.title} \n \n Rating: ${movieData.vote_average}/10 \n \n Voted: ${movieData.vote_count}`;
         posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`;
         poster.style.width = "400px";
         poster.style.height = "500px";
@@ -434,6 +441,13 @@ async function fetchMovie(genreId) {
             let videoLink = data.contents[0].video.videoId;
             console.log(videoLink);
             videoFrame.src = `https://www.youtube.com/embed/${videoLink}`;
+            movieContain.style.cssText = 
+            `display:flex;
+            font-size: 35px;
+            justify-content: center;
+            text-align: center;
+            font-family: cursive;
+            `
           });
         randomMovieButton.innerText =
           "Please Click to see a Random Movie of the same genre";
