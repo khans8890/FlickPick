@@ -377,7 +377,7 @@ async function getRandomMovie(genreId) {
           console.log(randomAmount);
           //Display the randomm movies only > 7
           for (let i = 0; i < randomAmount + 1; i++) {
-            if (data.results[i].vote_average > 7.0) {
+            if (data.results[i].vote_average > 7.0 && data.results[i].vote_count > 500){
               randomMovie = data.results[i];
             }
           }
@@ -415,7 +415,7 @@ async function fetchMovie(genreId) {
         let rate = 0;
         let movieData;
         for (let i = 0; i < data.results.length; i++) {
-          if (data.results[i].vote_average > rate) {
+          if (data.results[i].vote_average > rate && data.results[i].vote_count > 500) {
             rate = data.results[i].vote_average;
             movieData = data.results[i];
           }
