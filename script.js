@@ -12,7 +12,8 @@ const q4Contain = document.getElementById('q-4-container');
 const q5Contain = document.getElementById('q-5-container');
 const q6Contain = document.getElementById('q-6-container');
 const nextSix = document.getElementById('next-6');
-
+const movieContain = document.getElementById('movie-rec-container');
+const movieRec = document.querySelectorAll(".movieRec");
 const cells = document.querySelectorAll('.cell');
 const cellsTwo = document.querySelectorAll('.cell-q2');
 const cellsThree = document.querySelectorAll('.cell-q3');
@@ -23,13 +24,18 @@ const nextTwo = document.getElementById('next-2');
 const nextThree = document.getElementById('next-3');
 const nextFour = document.getElementById('next-4');
 const nextFive = document.getElementById('next-5');
-
+const randomMovieButton = document.createElement("button")
+const randomTitle = document.getElementById('randomTitle');
+const randomPoster = document.getElementById('randomPoster');
+const randomOverview = document.getElementById('overview');
 let answChoices1 = document.querySelectorAll('input[name="choice-1"]');
 let answChoices2 = document.querySelectorAll('input[name="choice-2"]');
 let answChoices3 = document.querySelectorAll('input[name="choice-3"]');
 let answChoices4 = document.querySelectorAll('input[name="choice-4"]');
 let answChoices5 = document.querySelectorAll('input[name="choice-5"]');
 let answChoices6 = document.querySelectorAll('input[name="choice-6"]');
+const releaseYr = document.getElementById('release-date');
+const runTime = document.getElementById("length");
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -54,18 +60,19 @@ let horrorCount = 0;
 let actionCount = 0;
 let countArr = [];
 let genreId = 0;
-let genreCount;
 
 //GenreDivs
-const romanceDiv = document.getElementById("romance-q6-container")
-const comedyDiv =  document.getElementById("comedy-q6-container")
-const horrorDiv =  document.getElementById("horror-q6-container")
-const actionDiv =  document.getElementById("action-q6-container")
+const romanceDiv = document.getElementById("romance-q6-container");
+const comedyDiv =  document.getElementById("comedy-q6-container");
+const horrorDiv =  document.getElementById("horror-q6-container");
+const actionDiv =  document.getElementById("action-q6-container");
 
 //Working to fetch genre
-const movieTitle = document.getElementById("title")
-const posterImg = document.getElementById(`poster`)
-const overviewSection = document.getElementById("overview")
+const movieTitle = document.getElementById("title");
+const posterImg = document.getElementById(`poster`);
+const overviewSection = document.getElementById("overview");
+//YT API
+const videoFrame = document.querySelector("iframe");
 
 document.getElementById('romance-1').addEventListener('click',() => nextOne.disabled = false);
 document.getElementById('comedy-1').addEventListener('click',() => nextOne.disabled = false);
@@ -164,8 +171,8 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
     for(const answChoice5 of answChoices5){
       if(answChoice5.checked) {
         answChoice5.id == 'romance-5'? romanceCount++: answChoice5.id == 'comedy-5'? comedyCount++: 
-       answChoice5.id == 'horror-5'? horrorCount++: 
-      actionCount++;
+        answChoice5.id == 'horror-5'? horrorCount++: 
+        actionCount++;
         console.log(romanceCount);
         console.log(comedyCount);
         console.log(horrorCount);
@@ -173,46 +180,43 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
         break;
       }
     }
-    countArr.push(romanceCount,comedyCount,horrorCount,actionCount)
-    countArr = countArr.filter(num => num === Math.max(romanceCount,comedyCount,horrorCount,actionCount))
-    genreCount = Math.max(...countArr)
-    console.log(countArr)
+    countArr.push(romanceCount,comedyCount,horrorCount,actionCount);
+    countArr = countArr.filter(num => num === Math.max(romanceCount,comedyCount,horrorCount,actionCount));
+    let genreCount = Math.max(...countArr);
+    console.log(countArr);
     if(countArr.length === 1){
       q5Contain.style.display = "none";
-      console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount === genreCount ? genreId = 35 : horrorCount === genreCount ? genreId = 27 : genreId = 28)
+      console.log(romanceCount === genreCount ? genreId = 14 : comedyCount === genreCount ? genreId = 4 : horrorCount === genreCount ? genreId = 11 : genreId = 1)
       fetchMovie(genreId);
     } else{
       console.log("Break this Tie")
       q5Contain.style.display = "none";
       q6Contain.style.display = "block";
     }
-    //check for the genre
-    //but order of ternary dictates output of 1st if tie occurs
-    // console.log(romanceCount === genreCount ? "Romance" : comedyCount == genreCount ? "Comedy" : horrorCount == genreCount ? "Horror" : actionCount == genreCount ? "Action" : "error")
-    
-    //Romance Section 
-
+    //Romance and Comedy Tie 
     if(romanceCount === genreCount && comedyCount === genreCount){
-      hide(horrorDiv, actionDiv)
+      hide(horrorDiv, actionDiv);
       //hide opposite
     }
+    //Romance and Horror Tie 
     if(romanceCount === genreCount && horrorCount === genreCount){
-      hide(comedyDiv, actionDiv)
+      hide(comedyDiv, actionDiv);
     }
+    //Romance and Action Tie 
     if(romanceCount === genreCount && actionCount === genreCount){
-      hide(comedyDiv, actionDiv)
+      hide(comedyDiv, horrorDiv);
     }
-    //Comedy
+    //Comedy and Horror Tie 
     if(comedyCount === genreCount && horrorCount === genreCount){
-      hide(romanceDiv, actionDiv)
+      hide(romanceDiv, actionDiv);
     }
+    //Comedy and Action Tie 
     if(comedyCount === genreCount && actionCount === genreCount){
-      hide(romanceDiv,horrorDiv)
-      // console.log("Comedy","Action")
+      hide(romanceDiv,horrorDiv);
     }
-    //Horror
-    if(horrorCount === genreCount && horrorCount === genreCount)
-      hide(romanceDiv,comedyDiv)
+    //Horror and Action Tie 
+    if(horrorCount === genreCount && actionCount === genreCount)
+      hide(romanceDiv,comedyDiv);
       // console.log("Horror","Action")​
   })
 
@@ -237,58 +241,141 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
     }
     let genreCount = Math.max(romanceCount,comedyCount,horrorCount,actionCount)
     //genre ID
-    console.log(romanceCount === genreCount ? genreId = 10749 : comedyCount === genreCount ? genreId = 35 : horrorCount === genreCount ? genreId = 27 : genreId = 28 )
+    console.log(romanceCount === genreCount ? genreId = 14 : comedyCount === genreCount ? genreId = 4 : horrorCount === genreCount ? genreId = 11 : genreId = 1 )
     q6Contain.style.display = "none";
-   fetchMovie(genreId);
+    fetchMovie(genreId);
   })
-
-  const requestOptions = {
-    method: 'GET',
-    redirect: 'follow'
-  };
-
-  function fetchMovie(genreId){
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}`, requestOptions)
-    .then(response => response.json())
-    .then(data => 
-    //This to fetch the highest rating and output as the 1st appearence
-    {data.results;
-      let rate = 0;
-      let movieData;  
-      for (let i = 0; i < data.results.length;i++){
-        if (data.results[i].vote_average > rate){
-          rate = data.results[i].vote_average;
-          // rate = Math.max(rate, data.results[i].vote_average);
-          movieData = data.results[i]
-          fetchAvail(movieData)
-        }
-      }
-      console.log(data);
-      console.log(rate);
-      console.log(movieData);
-      let posterPath = movieData.poster_path
-      console.log(posterImg)
-      movieTitle.innerText = `${movieData.title} \n Rating: ${rate}`
-      posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`
-      poster.style.width = "400px"
-      poster.style.height = "500px" 
-      overviewSection.innerText = movieData.overview
-  })}
 
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': '142e4906admshce7499d95d69ec7p137cacjsne487cc68aa98',
-      'X-RapidAPI-Host': 'utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com'
+      'X-RapidAPI-Key': '483126c32amsh524fdc002e0512ep1528c2jsn17c3de5b89b1',
+      'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
     }
   };
-  
-  function fetchAvail(movieData){
-  fetch(`https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup?term=${movieData.title}=us`, options)
-    .then(response => response.json())
-    .then(response => console.log(response))
-    .catch(err => console.error(err))
+
+  const requestOptions = { 
+    method: 'GET',
+    redirect: 'follow'
   };
+  function fetchMovie(genreId) {
+    // for (let page = 1; page < 10; page++) {
+      //Fetches list of movies to a genre
+      fetch(`https://api.watchmode.com/v1/list-titles/?apiKey=Srktrqdif9k4CAPXk1MtGyy6xGGuXCFIohSVKMgK&genres=${genreId}&type=movie&limit=30`, requestOptions)
+        .then(response => response.json())
+        .then(data =>
+        // isolates the list by most popular & grabs one
+        {
+          for(let i = 0; i < data.titles.length; i++){
+          let movieInfo = data.titles[i];        
+           console.log(movieInfo);
+           fetch(`https://api.watchmode.com/v1/title/${movieInfo.id}/details/?apiKey=Srktrqdif9k4CAPXk1MtGyy6xGGuXCFIohSVKMgK`)
+           .then(response => response.json())
+           .then(movie => {
+            console.log(movie);
+            releaseYr.innerText = `Release Date: ${movie.release_date}`;
+             let posterPath = movie.poster;
+            // console.log(posterPath);
+             posterImg.src = posterPath;
+             posterImg.style.width = "400px";
+             posterImg.style.height = "500px";
+             movieTitle.innerText = movie.title;
+             runTime.innerText = `Length: ${movie.runtime_minutes} min`
+             randomOverview.innerText = movie.plot_overview;
+            
+             // where to stream 
+             fetch(`https://api.watchmode.com/v1/title/${movieInfo.id}/sources?apiKey=Srktrqdif9k4CAPXk1MtGyy6xGGuXCFIohSVKMgK`)
+             .then(response => response.json())
+             .then(movie => console.log(movie));
+           //  let videoLink = data.contents[0].video.videoId;
+             videoFrame.src = 'https://www.youtube-nocookie.com/embed/v=VDLRokc5c-Y';
+          })
+          break;
+        }
+     
+    
+      movieContain.append(randomMovieButton);
+      randomMovieButton.innerText = "New Pick"
+      // randomMovie Display Section
+      randomMovieButton.addEventListener('click', () => {
+      for (let i = 1; i < data.titles.length; i++) {
+        console.log(data.titles[i]);
+        movieContain.style.display = "none";
+        fetchMovie(genreId);
+      }
+
+    })
+
+
+
+    })
+  }
+    
+
+  
+          
+          
+  //         fetch(`https://youtube138.p.rapidapi.com/search/?q=${movieData.title}movie&trailer`, options).then(response => response.json()).then(data => {
+  //           console.log(data);
+  //           console.log(data.contents);
+  
+  //         })
+  //         
+  //           fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}&page=${page}`, requestOptions)
+  //             .then(response => response.json())
+  //             .then(data => {
+  //               data.results;
+  //               console.log(data.results)
+  //               let randomMovie;
+  //               let randomAmount = Math.floor(Math.random() * data.results.length)
+  //               console.log(randomAmount)
+  //               //Display the randomm movies only > 7
+  //               for (let i = 0; i < randomAmount + 1; i++) {
+  //                 if (data.results[i].vote_average > 7.0) {
+  //                   randomMovie = data.results[i]
+  //                 }
+  //               }
+  //               console.log(randomMovie)
+  //               let randomPost = randomMovie.poster_path
+  //               randomTitle.innerText = `${randomMovie.title} \n Rating: ${randomMovie.vote_average}/10 \n Voted: ${randomMovie.vote_count}`
+  //               randomPoster.src = `https://image.tmdb.org/t/p/original${randomPost}`
+  //               randomPoster.style.width = "400px"
+  //               randomPoster.style.height = "500px"
+  //               randomOverview.innerText = randomMovie.overview
+  //             })
+  //         })
+  //       })
+  //   }
+  // }
+
+  // function fetchMovie(genreId){
+  //   fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}`, requestOptions)
+  //   .then(response => response.json())
+  //   .then(data => 
+  //   //This to fetch the highest rating and output as the 1st appearence
+  //   {data.results;
+  //     let rate = 0;
+  //     let movieData;  
+  //     for (let i = 0; i < data.results.length;i++){
+  //       if (data.results[i].vote_average > rate){
+  //         rate = data.results[i].vote_average;
+  //         // rate = Math.max(rate, data.results[i].vote_average);
+  //         movieData = data.results[i]
+  //         fetchAvail(movieData)
+  //       }
+  //     }
+  //     console.log(data);
+  //     console.log(rate);
+  //     console.log(movieData);
+  //     let posterPath = movieData.poster_path
+  //     console.log(posterImg)
+  //     movieTitle.innerText = `${movieData.title} \n Rating: ${rate}`
+  //     posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`
+  //     poster.style.width = "400px"
+  //     poster.style.height = "500px" 
+  //     overviewSection.innerText = movieData.overview
+  // })}
+
 
 
   // const fetch = require('node-fetch');
@@ -301,3 +388,12 @@ document.getElementById('action-6').addEventListener('click',() => nextSix.disab
 //         console.log(json);
 //     }); 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  

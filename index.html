@@ -1,173 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <title>Movie</title>
 </head>
+
 <body>
     <div id="intro-container">
         <h3 id="type-quiz">Personality Quiz</h3>
         <h1 id="headline">Get a Movie</h1>
         <h4 id="quiz-intro">Quiz Introduction</h4>
-        <h5 id="quiz-intro-descr">If you were a fictional character what choices would you make and what movie should you watch based on that?</h5>
+        <h5 id="quiz-intro-descr">If you were a fictional character what choices would you make and what movie should
+            you watch based on that?</h5>
         <div class="start-button-container">
             <button id="s-button">Start Quiz</button>
         </div>
     </div>
     <div id="q-1-container">
-        <form id="q-1-form"> 
-            <h3 id="q-1-head"> Imagine one day you find yourself stranded seemingly in a desert island. Then, you wake up and begin searching around. Until, you make out with your blurry vision an imaginary figure faraway, what shall you do?</h3>
+        <form id="q-1-form">
+            <h3 id="q-1-head"> Imagine one day you find yourself stranded seemingly in a desert island. Then, you wake
+                up and begin searching around. Until, you make out with your blurry vision an imaginary figure faraway,
+                what shall you do?</h3>
+            <div id="bodyinputs">
+                <input type="radio" class="inputcircle" id="romance-1" name="choice-1">
+                <label class='options' for="romance-1"> You decide to confess your love and propose to the figure with
+                    your heart and soul in mind</label>
+                <br>
 
-            <input type="radio" id="romance-1" name="choice-1">
-            <label for="romance-1"> You decide to confess your love and propose to the figure with your heart and soul in mind</label>
-            <br>
+                <input type="radio" class="inputcircle" id="comedy-1" name="choice-1">
+                <label class='options' for="comedy-1"> You begin to act up and started shrieking because you realize
+                    this figure was something unexpected.. it was your mom?</label>
+                <br>
 
-            <input type="radio"  id="comedy-1" name="choice-1">
-            <label for="comedy-1"> You begin to act up and started shrieking because you realize this figure was something unexpected.. it was your mom?</label>
-            <br>
+                <input type="radio" class="inputcircle" id="horror-1" name="choice-1">
+                <label class='options' for="horror-1"> You quickly took cover behind a rock, slowly holding your breath,
+                    and await the figure to pass by you</label>
+                <br>
 
-            <input type="radio" id="horror-1" name="choice-1">
-            <label for="horror-1"> You quickly took cover behind a rock, slowly holding your breath, and await the figure to pass by you</label>
-            <br>
-            
-            <input type="radio" id="action-1" name="choice-1">
-            <label for="action-1"> You chosen to arm yourself with a spear you made out of wood and go sprint towards the figure</label>
-            <br>
-            <button id="next-1">Next</button>
-            <p id="error"></p> 
+                <input type="radio" class="inputcircle" id="action-1" name="choice-1">
+                <label class='options' for="action-1"> You chosen to arm yourself with a spear you made out of wood and
+                    go sprint towards the figure</label>
+                <br>
+                <button id="next-1">Next</button>
+            </div>
+            <p id="error"></p>
         </form>
     </div>
     <div id="q-2-container">
         <form id="q-2-form">
-         <h3 id="q-2-head"> You're out in the woods camping and lights from the sky appear to be getting closer, what is it?</h3>
-        <input type="radio" id="romance-2" name="choice-2">
-        <label for="romance-2">You notice it's the big dipper in the sky, reminding you of your first time stargazing with the love of your life</label>
-        <br>
+            <h3 id="q-2-head"> You're out in the woods camping and lights from the sky appear to be getting closer, what
+                is it?</h3>
+            <div id="bodyinputs2">
+                <input type="radio" class="inputcircle2" id="romance-2" name="choice-2">
+                <label class="options2" for="romance-2">You notice it's the big dipper in the sky, reminding you of your
+                    first time stargazing with the love of your life</label>
+                <br>
 
-        <input type="radio" id="comedy-2" name="choice-2">
-        <label for="comedy-2">It's a camping group setting up lights in the trees asking you to a dance off</label>
-        <br>
+                <input type="radio" class="inputcircle2" id="comedy-2" name="choice-2">
+                <label class="options2" for="comedy-2">It's a camping group setting up lights in the trees asking you to
+                    a dance off</label>
+                <br>
 
-        <input type="radio" id="horror-2" name="choice-2">
-        <label for="horror-2">It's aliens! So you decide to outrun them in fear for your life</label>
-        <br>
+                <input type="radio" class="inputcircle2" id="horror-2" name="choice-2">
+                <label class="options2" for="horror-2">It's aliens! So you decide to outrun them in fear for your
+                    life</label>
+                <br>
 
-        <input type="radio" id="action-2" name="choice-2">
-        <label for="action-2">It's unknown so you take initiative with flares, a pocket knife, and a torch lighter from your bag and prepare for the worst</label>
-        <br>
-        <button id="next-2">Next</button>
-    </form>
+                <input type="radio" class="inputcircle2" id="action-2" name="choice-2">
+                <label class="options2" for="action-2">It's unknown so you take initiative with flares, a pocket knife,
+                    and a torch lighter from your bag and prepare for the worst</label>
+                <br>
+                <button id="next-2">Next</button>
+            </div>
+        </form>
     </div>
     <div id="q-3-container">
         <form id="q-3-form">
-            <h3 id="q-3-head">It's night time and you're trying to fall asleep but you suddenly hear a noise, what do you do?</h3>
+            <h3 id="q-3-head">It's night time and you're trying to fall asleep but you suddenly hear a noise, what do
+                you do?</h3>
+            <div id="bodyinputs3">
+                <input type="radio" class="inputcircle3" id="romance-3" name="choice-3">
+                <label class="options3" for="romance-3">It's your partner, you get up and embrace them as if it's your first time you're
+                    seeing them</label>
+                <br>
 
-            <input type="radio" id="romance-3" name="choice-3">
-            <label for="romance-3">It's your partner, you get up and embrace them as if it's your first time you're seeing them</label>
-            <br>
-    
-            <input type="radio" id="comedy-3" name="choice-3">
-            <label for="comedy-3">You look down and see it's your cat with a chinese takeout carton over their head bumping into everything</label>
-            <br>
-    
-            <input type="radio" id="horror-3" name="choice-3">
-            <label for="horror-3">A scratchy voice calls for you, exhailing loudly as you desperately try to find a way out alive</label>
-            <br>
-    
-            <input type="radio" id="action-3" name="choice-3">
-            <label for="action-3">You step up and tell yourself it's your house so no one can take it!</label>
-            <br>
-            <button id="next-3">Next</button>
+                <input type="radio" class="inputcircle3" id="comedy-3" name="choice-3">
+                <label class="options3"for="comedy-3">You look down and see it's your cat with a chinese takeout carton over their head
+                    bumping into everything</label>
+                <br>
+
+                <input type="radio" class="inputcircle3" id="horror-3" name="choice-3">
+                <label class="options3"for="horror-3">A scratchy voice calls for you, exhailing loudly as you desperately try to find a
+                    way out alive</label>
+                <br>
+
+                <input type="radio" class="inputcircle3" id="action-3" name="choice-3">
+                <label class ="options3"for="action-3">You step up and tell yourself it's your house so no one can take it!</label>
+                <br>
+                <button id="next-3">Next</button>
+            </div>
         </form>
     </div>
     <div id="q-4-container">
         <form id="q-4-form">
             <h3 id="q-4-head">You're swimming on a beach and you notice something out in the water, what is it?
             </h3>
+        <div id="bodyinputs4"> 
+            <input type="radio" class="inputcircles4" id="romance-4" name="choice-4">
+            <label class="options4"for="romance-4">You approached the unknown, to learned it was just your lover coming out of the
+                water, and you two had a fun playdate</label>
+            <br>
 
-            <input type="radio" id="romance-4" name="choice-4">
-            <label for="romance-4">You approached the unknown, to learned it was just your lover coming out of the water, and you two had a fun playdate</label>
+            <input type="radio" class="inputcircles4" id="comedy-4" name="choice-4">
+            <label class="options4"for="comedy-4">You started to noticed in the water, it is actually your swimming clothes floating,
+                and come to realized your bottom half is naked.</label>
             <br>
-    
-            <input type="radio" id="comedy-4" name="choice-4">
-            <label for="comedy-4">You started to noticed in the water, it is actually your swimming clothes floating, and come to realized your bottom half is naked.</label>
+
+            <input type="radio" class="inputcircles4" id="horror-4" name="choice-4">
+            <label class="options4"for="horror-4">You come to the realization that the thing ... approaching underneath and has
+                has a big jaw of teeth ... OMG it is a shark!</label>
             <br>
-    
-            <input type="radio" id="horror-4" name="choice-4">
-            <label for="horror-4">You come to the realization that a dark shadowy figure approaching underneath and you see a big jaw of teeth coming out of the water.. OMG it is a shark!</label>
-            <br>
-    
-            <input type="radio" id="action-4" name="choice-4">
-            <label for="action-4">There is something bubbling in the water, you decide to be a hero, hold your breathe, and dive deep into the ocean saving the helpless figure drowning.</label>
+
+            <input type="radio" class="inputcircles4" id="action-4" name="choice-4">
+            <label class="options4"for="action-4">There is something bubbling in the water, you decide to be a hero, hold your breathe,
+                and dive deep into the ocean saving the helpless figure drowning.</label>
             <br>
             <button id="next-4">Next</button>
+        </div>
         </form>
     </div>
     <div id="q-5-container">
         <form id="q-5-form">
-            <h3 id="q-5-head">You're in the airport waiting to collect your luggage when suddenly someone bumps into your shoulder and you look up, who is it?
+            <h3 id="q-5-head">You're in the airport waiting to collect your luggage when suddenly someone bumps into
+                your shoulder and you look up, who is it?
             </h3>
+        <div id="bodyinputs5"> 
+            <input type="radio" class="inputcircles5" id="romance-5" name="choice-5">
+            <label class="options5"for="romance-5">You are star strucked, is this love at first sight? ... your soul mate you wonder?
+                You begin to confess your undying love and shout out "Please marry me!".</label>
+            <br>
 
-            <input type="radio" id="romance-5" name="choice-5">
-            <label for="romance-5">You are star strucked, is this love at first sight? ... your soul mate you wonder? You begin to confess your undying love and shout out "Please marry me!" for everyone to hear.</label>
+            <input type="radio" class="inputcircles5" id="comedy-5" name="choice-5">
+            <label class="options5"for="comedy-5">The figure in question pulls out a suitcase and opens it, it's clowns! A clown one by
+                one start to come out of the bag and circus music starts to play.</label>
             <br>
-    
-            <input type="radio" id="comedy-5" name="choice-5">
-            <label for="comedy-5">The figure in question pulls out a suitcase and opens it, it's clowns! A clown one by one start to come out of the bag and circus music starts to play.</label>
+
+            <input type="radio" class="inputcircles5"id="horror-5" name="choice-5">
+            <label class="options5"for="horror-5">The mysterious figure was a terrorist holding up a gun, whom started to hold the
+                airport hostage by shooting the area, and you start to run for your life.</label>
             <br>
-    
-            <input type="radio" id="horror-5" name="choice-5">
-            <label for="horror-5">The mysterious figure was a terrorist holding up a gun, whom started to hold the airport hostage by shooting the area, and you start to run for your life.</label>
-            <br>
-    
-            <input type="radio" id="action-5" name="choice-5">
-            <label for="action-5">You recognize it was your archnemesis, therefore you threw the luggage at the them, commenced a showdown, and you engage in a one versus one battle using the airport as your area.</label>
+
+            <input type="radio" class="inputcircles5"id="action-5" name="choice-5">
+            <label class="options5"for="action-5">You recognize it was your archnemesis, therefore you threw the luggage at the them,
+                commenced a showdown, and you engage in a showdown.</label>
             <br>
             <button id="next-5">Next</button>
+        </div>
         </form>
     </div>
     <div id="q-6-container">
         <form id="q-6-form">
-            <h4 id = "bonus">Bonus Question</h4>
-            <h3 id="q-6-head">Visualize yourself trapped in a never ending day cycle. No matter what the end of the day will reset you to wake up back to the same day and morning. What shall you do?
+            <h4 id="bonus">Bonus Question</h4> 
+            <h3 id="q-6-head">Visualize yourself trapped in a never ending day cycle. No matter what the end of the day
+                will reset you to wake up back to the same day and morning. What shall you do?
             </h3>
+         <div id="bodyinputs6"> 
+            <div id="romance-q6-container">
+                <input type="radio" class="inputcircles6" id="romance-6" name="choice-6">
+                <label class="options6"for="romance-6">You live to your dream, searching for the one and only love of your life, and you
+                    spend the rest of the day together before the reset hits.</label>
+                <br>
+            </div>
 
-         <div id="romance-q6-container">
-            <input type="radio" id="romance-6" name="choice-6">
-            <label for="romance-6">You live to your dream, searching for the one and only love of your life, and you spend the rest of the day together before the reset hits.</label>
-            <br>
-        </div>
+            <div id="comedy-q6-container">
+                <input type="radio"class="inputcircles6" id="comedy-6" name="choice-6">
+                <label class="options6"for="comedy-6">There was no shame to your this path, you proceed to prank,and fool everyone
+                    around you. You made the whole world your enemy.. oops?</label>
+                <br>
+            </div>
 
-        <div id="comedy-q6-container">
-            <input type="radio" id="comedy-6" name="choice-6">
-            <label for="comedy-6">There was no shame to your this path, you proceed to prank,and fool everyone around you. You made the whole world your enemy.. oops?</label>
-            <br>
-        </div>
+            <div id="horror-q6-container">
+                <input type="radio" class="inputcircles6" id="horror-6" name="choice-6">
+                <label class="options6"for="horror-6">You begin to live your life in pain and agnoy. You are discovery ways to end this
+                    miserable cycle by only testing many ways to die.</label>
+                <br>
+            </div>
 
-        <div id="horror-q6-container">
-            <input type="radio" id="horror-6" name="choice-6">
-            <label  for="horror-6">You begin to live your life in pain and agnoy. You are discovery ways to end this miserable cycle by only testing many ways to die.</label>
-            <br>
-        </div>
-
-        <div id="action-q6-container">
-            <input type="radio" id="action-6" name="choice-6">
-            <label for="action-6">You live to your best, live to do all the craziest, and the unimaginable. You sail the seas, fly to the moon, and save lives around the world everyday.</label>
-            <br>
-        </div>
+            <div id="action-q6-container">
+                <input type="radio" class="inputcircles6" id="action-6" name="choice-6">
+                <label class="options6"for="action-6">You live to your best, live to do all the craziest, and the unimaginable. You sail
+                    the seas, fly to the moon, and save lives around the world everyday.</label>
+                <br>
+            </div>
             <button id="next-6">Next</button>
+        </div>
         </form>
     </div>
-    <div id = "movie-rec-container">
-        <h1 id = "title"></h1>
-        <img id = "poster"/>
-        <p id = "overview"></p>
+    <div id = "random-movie">
+        <h4 id = "randomTitle"></h4>
+        <img id = "randomPoster"/>
+        <p id = "random-overview"></p>
     </div>
-    <!-- <p id = "title"></p> -->
-    <script type="module" src ="script.js">
-    </script>
+    <div id="movie-rec-container">
+        <h4 id="title"  class = "movieRec"></h4>
+        <img id="poster"  class = "movieRec" />
+        <p id="overview"  class = "movieRec"></p>
+    </div>
+    <iframe id ="movieVideo" class = "movieRec" width="500" height="500" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <script type="module" src ="script.js"></script>
 </body>
 </html>
