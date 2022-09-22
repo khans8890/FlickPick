@@ -14,22 +14,6 @@ const q6Contain = document.getElementById("q-6-container");
 const nextSix = document.getElementById("next-6");
 const movieContain = document.getElementById("movie-rec-container");
 const movieRec = document.querySelectorAll(".movieRec");
-<<<<<<< HEAD
-const cells = document.querySelectorAll('.cell');
-const cellsTwo = document.querySelectorAll('.cell-q2');
-const cellsThree = document.querySelectorAll('.cell-q3');
-const cellsFour = document.querySelectorAll('.cell-q4');
-const cellsFive = document.querySelectorAll('.cell-q5');
-const nextOne = document.getElementById('next-1');
-const nextTwo = document.getElementById('next-2');
-const nextThree = document.getElementById('next-3');
-const nextFour = document.getElementById('next-4');
-const nextFive = document.getElementById('next-5');
-const randomMovieButton = document.createElement("button")
-const randomTitle = document.getElementById('randomTitle');
-const randomPoster = document.getElementById('randomPoster');
-const randomOverview = document.getElementById('overview');
-=======
 
 const cells = document.querySelectorAll(".cell");
 const cellsTwo = document.querySelectorAll(".cell-q2");
@@ -48,7 +32,6 @@ const randomTitle = document.getElementById("randomTitle");
 const randomPoster = document.getElementById("randomPoster");
 const randomOverview = document.getElementById("random-overview");
 
->>>>>>> 051f6e7509a3bac3129cd9684f98c67af4394028
 let answChoices1 = document.querySelectorAll('input[name="choice-1"]');
 let answChoices2 = document.querySelectorAll('input[name="choice-2"]');
 let answChoices3 = document.querySelectorAll('input[name="choice-3"]');
