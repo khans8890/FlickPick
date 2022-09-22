@@ -441,14 +441,14 @@ async function fetchMovie(genreId) {
             let videoLink = data.contents[0].video.videoId;
             console.log(videoLink);
             videoFrame.src = `https://www.youtube.com/embed/${videoLink}`;
-            movieContain.style.cssText = 
-            `display:flex;
-            font-size: 35px;
-            justify-content: center;
-            text-align: center;
-            font-family: cursive;
-            `
           });
+          movieContain.style.cssText = 
+          `display:flex;
+          font-size: 35px;
+          justify-content: center;
+          text-align: center;
+          font-family: cursive;
+          `
         randomMovieButton.innerText =
           "Please Click to see a Random Movie of the same genre";
       }
