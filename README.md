@@ -1,8 +1,18 @@
 # Give-me-a-Movie🎥
-JS front-end application that has the user fill out a form to get a movie list of personalized recommendations tailored to their anwer choices. 
+A website that reduces the time a user wastes perusing through a streaming service by giving a movie recommendation tailored to a user’s taste.
+
 
 ***Team:***
+* Product Manager: Ana
+* Developer: Caston
+* Developer: Jowel
+***Tech Stack:***
+* Frontend: HTML, CSS, Javascript
 
-* Product Manager: Sumaira
-* Developer: Evan
-* Developer: Richard 
+***Skills:***
+* API
+* fetchAPI
+* POST/GET
+* Promises
+* webAPI
+___
