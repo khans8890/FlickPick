@@ -66,15 +66,9 @@ let genreId = 0;
 
 //GenreDivs
 const romanceDiv = document.getElementById("romance-q6-container");
-<<<<<<< HEAD
-const comedyDiv =  document.getElementById("comedy-q6-container");
-const horrorDiv =  document.getElementById("horror-q6-container");
-const actionDiv =  document.getElementById("action-q6-container");
-=======
 const comedyDiv = document.getElementById("comedy-q6-container");
 const horrorDiv = document.getElementById("horror-q6-container");
 const actionDiv = document.getElementById("action-q6-container");
->>>>>>> 051f6e7509a3bac3129cd9684f98c67af4394028
 
 //Working to fetch genre
 const movieTitle = document.getElementById("title");
@@ -290,47 +284,6 @@ nextTwo.addEventListener("click", (e) => {
     (id2).style.display = "none";
     }
 
-nextThree.addEventListener("click", (e) => {
-  e.preventDefault();
-  q3Contain.style.display = "none";
-  q4Contain.style.display = "block";
-  for (const answChoice3 of answChoices3) {
-    if (answChoice3.checked) {
-      // console.log(answChoice3.id);
-      answChoice3.id == "romance-3"
-        ? romanceCount++
-        : answChoice3.id == "comedy-3"
-        ? comedyCount++
-        : answChoice3.id == "horror-3"
-        ? horrorCount++
-        : actionCount++;
-      break;
-    }
-    let genreCount = Math.max(romanceCount,comedyCount,horrorCount,actionCount)
-    //genre ID
-    console.log(romanceCount === genreCount ? genreId = 14 : comedyCount === genreCount ? genreId = 4 : horrorCount === genreCount ? genreId = 11 : genreId = 1 )
-    q6Contain.style.display = "none";
-    fetchMovie(genreId);
-  }
-})
-
-nextFour.addEventListener("click", (e) => {
-  e.preventDefault();
-  q4Contain.style.display = "none";
-  q5Contain.style.display = "block";
-  for (const answChoice4 of answChoices4) {
-    if (answChoice4.checked) {
-      answChoice4.id == "romance-4"
-        ? romanceCount++
-        : answChoice4.id == "comedy-4"
-        ? comedyCount++
-        : answChoice4.id == "horror-4"
-        ? horrorCount++
-        : actionCount++;
-      break;
-    }
-  }
-});
 
   const requestOptions = { 
     method: 'GET',
@@ -383,9 +336,6 @@ nextFour.addEventListener("click", (e) => {
       }
 
     })
-
-
-
     })
   }
     
