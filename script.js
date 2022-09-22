@@ -22,7 +22,7 @@ const nextTwo = document.getElementById("next-2");
 const nextThree = document.getElementById("next-3");
 const nextFour = document.getElementById("next-4");
 const nextFive = document.getElementById("next-5");
-
+const psychoanalysis = document.getElementById("psychoanalysis");
 const randomMovieButton = document.createElement("button");
 const randomMovie = document.getElementById("random-movie");
 const randomTitle = document.getElementById("randomTitle");
@@ -386,7 +386,7 @@ async function getRandomMovie(genreId) {
               randomMovie = data.results[i];
             }
           }
-          console.log(randomMovie);
+          // console.log(randomMovie);
           let randomPost = randomMovie.poster_path;
           randomPoster.src = `https://image.tmdb.org/t/p/original${randomPost}`;
           randomTitle.innerText = `${randomMovie.title} \n \n Rating: ${randomMovie.vote_average}/10 \n \n Voted: ${randomMovie.vote_count} \n \n ${randomMovie.overview}`;
@@ -402,6 +402,7 @@ async function getRandomMovie(genreId) {
         `
     });
   }
+  analysis(genreId);
 }
 
 async function fetchMovie(genreId) {
@@ -477,4 +478,18 @@ async function fetchMovie(genreId) {
         `
     }
     );
+    analysis(genreId);
+}
+
+
+function analysis(genreId){
+  if(genreId == 10479){
+    psychoanalysis.innerText = "You're a romantic at heart, chasing love where you see it and if you don't see it you create it. We have the just film for your romantic tendencies.";
+  } else if(genreId == 35){
+    psychoanalysis.innerText = "A comic in every room you're in, you make the ones around you laugh, sparking joy everywhere you go. At times, you are a bit immature but no one takes it to heart when the jokes are good, we have the film guaranteed to make you laugh."
+  } else if(genreId == 27){
+    psychoanalysis.innerText = "You're a thrill seeker and enjoy living life on the edge. We have just the film to keep you on the edge of your seat."
+  } else {
+    psychoanalysis.innerText = "A hero at heart, you often daydream about saving everyone around you. Live vicariously through this film and be the hero you always want to be."
+  }
 }
