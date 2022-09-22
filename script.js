@@ -58,7 +58,7 @@ let horrorCount = 0;
 let actionCount = 0;
 let countArr = [];
 let genreId = 0;
-
+let genreCount = 0;
 //GenreDivs
 const romanceDiv = document.getElementById("romance-q6-container");
 const comedyDiv = document.getElementById("comedy-q6-container");
@@ -330,12 +330,12 @@ nextSix.addEventListener("click", (e) => {
       break;
     }
   }
-  let genreCount = Math.max(
+  genreCount = Math.max(
     romanceCount,
     comedyCount,
     horrorCount,
-    actionCount
-  );
+    actionCount)
+
   console.log(
     romanceCount === genreCount
       ? (genreId = 10749)
@@ -366,6 +366,7 @@ async function getRandomMovie(genreId) {
   for (let page = 1; page <= 5; page++) {
     randomMovieButton.addEventListener("click", async (e) => {
       videoFrame.src = "";
+      psychoanalysis = "";
       for (let i = 0; i < movieRec.length; i++) {
         movieRec[i].style.display = "none";
       }
@@ -390,8 +391,8 @@ async function getRandomMovie(genreId) {
           let randomPost = randomMovie.poster_path;
           randomPoster.src = `https://image.tmdb.org/t/p/original${randomPost}`;
           randomTitle.innerText = `${randomMovie.title} \n \n Rating: ${randomMovie.vote_average}/10 \n \n Voted: ${randomMovie.vote_count} \n \n ${randomMovie.overview}`;
-          randomPoster.style.width = "400px";
-          randomPoster.style.height = "500px";
+          randomPoster.style.width = "800px";
+          randomPoster.style.height = "800px";
         })
       randomMovie.style.cssText =
         `display:flex;
@@ -402,11 +403,11 @@ async function getRandomMovie(genreId) {
         `
     });
   }
-  analysis(genreId);
 }
 
 async function fetchMovie(genreId) {
   getRandomMovie(genreId);
+  analysis(genreId)
   //Fetching the top rated movie of page 1
   fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}&page=1`,
@@ -431,8 +432,8 @@ async function fetchMovie(genreId) {
       console.log(posterImg);
       posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`;
       movieTitle.innerText = `${movieData.title} \n \n Rating: ${movieData.vote_average}/10 \n \n Voted: ${movieData.vote_count} \n \n ${movieData.overview}`;
-      poster.style.width = "400px";
-      poster.style.height = "500px";
+      poster.style.width = "800px";
+      poster.style.height = "800px";
       movieContain.append(randomMovieButton);
       fetch(
         `https://youtube138.p.rapidapi.com/search/?q=${movieData.title}movie&trailer`,
@@ -478,16 +479,15 @@ async function fetchMovie(genreId) {
         `
     }
     );
-    analysis(genreId);
 }
 
 
-function analysis(genreId){
-  if(genreId == 10479){
+function analysis(genreId) {
+  if (genreId == 10479) {
     psychoanalysis.innerText = "You're a romantic at heart, chasing love where you see it and if you don't see it you create it. We have the just film for your romantic tendencies.";
-  } else if(genreId == 35){
+  } else if (genreId == 35) {
     psychoanalysis.innerText = "A comic in every room you're in, you make the ones around you laugh, sparking joy everywhere you go. At times, you are a bit immature but no one takes it to heart when the jokes are good, we have the film guaranteed to make you laugh."
-  } else if(genreId == 27){
+  } else if (genreId == 27) {
     psychoanalysis.innerText = "You're a thrill seeker and enjoy living life on the edge. We have just the film to keep you on the edge of your seat."
   } else {
     psychoanalysis.innerText = "A hero at heart, you often daydream about saving everyone around you. Live vicariously through this film and be the hero you always want to be."

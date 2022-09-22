@@ -283,5 +283,12 @@ body {
     font-family: cursive;
 }
 
-
+h3 {
+    font-size: 32px;
+    margin: auto
+}
+h4{
+    padding: 0px 20px;
+    font-size: 48px;
+}
 
