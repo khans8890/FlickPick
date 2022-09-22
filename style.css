@@ -4,9 +4,8 @@ body {
     display: grid;
     place-items: center;
     color: black;
-    font-family: 'Roboto', sans-serif;
-
 }
+
 @keyframes changeBg {
     0% {
         background-image: url(seaBg.png);
@@ -39,11 +38,13 @@ body {
 .start-button-container{
     text-align: center;
     padding-top: 50px;
+
 }
 
 #type-quiz {
     font-size: 45px;
     text-align: center; 
+    font-family: cursive;
     padding-top: 100px;
     font-weight: bold;
 }
@@ -59,6 +60,7 @@ body {
 #quiz-intro{
     font-size: 35px;
     text-align: center;
+    font-family: cursive;
     padding-top: 20px;
     font-weight: bold;
 }
@@ -66,14 +68,24 @@ body {
 #quiz-intro-descr{
     font-size: 35px;
     text-align: center;
+    font-family: cursive;
     padding-top: 30px;
     font-weight: bold;
 }
 
 #s-button{
-    font-size: 20px;
-    
+    font-size: 25px;
+    text-align: center;
+    padding:9px 25px; 
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
+
+
 
 /*first form*/
 
@@ -81,12 +93,18 @@ body {
     font-size: 35px;
     text-align: center;
     padding-top: 100px;
+    font-family: cursive;
 }
 
 .options{
    font-size: 20px; 
    margin-left: 30px;
-   
+   font-family: cursive;
+
+}
+
+.options:hover{
+    background-color: rgba(255,255,255,.4); 
 }
 
 .inputcircle {
@@ -113,7 +131,12 @@ body {
 .options2{
     font-size: 20px; 
    margin-left: 30px;
+   font-family: cursive;
 }
+
+.options2:hover{
+    background-color: rgba(255,255,255,.4);
+} 
 
 .inputcircle2{
     margin-left: 40px;
@@ -133,12 +156,18 @@ body {
     font-size: 35px;
     text-align: center;
     padding-top: 100px;
+    font-family: cursive;
 }
 
 .options3{
     font-size: 20px; 
    margin-left: 30px;
+   font-family: cursive;
 }
+
+.options3:hover{
+    background-color: rgba(255,255,255,.4);
+} 
 
 .inputcircle3{
     margin-left: 40px; 
@@ -158,12 +187,18 @@ body {
     font-size: 35px;
     text-align: center;
     padding-top: 100px;
+    font-family: cursive;
 }
 
 .options4{
     font-size: 20px; 
    margin-left: 30px;
+   font-family: cursive;
 }
+
+.options4:hover{
+    background-color: rgba(255,255,255,.4);
+} 
 
 .inputcircles4{
     margin-left: 40px; 
@@ -183,12 +218,18 @@ body {
     font-size: 35px;
     text-align: center;
     padding-top: 100px;
+    font-family: cursive;
 }
 
 .options5{
     font-size: 20px; 
    margin-left: 30px;
+   font-family: cursive;
 }
+
+.options5:hover{
+    background-color: rgba(255,255,255,.4);
+} 
 
 .inputcircles5{
     margin-left: 30px; 
@@ -210,12 +251,18 @@ body {
     font-size: 35px;
     text-align: center;
     padding-top: 100px;
+    font-family: cursive;
 } 
 
 .options6{
     font-size: 20px; 
     margin-left: 30px;
+    font-family: cursive;
 }
+
+.options6:hover{
+    background-color: rgba(255,255,255,.4);
+} 
 
 .inputcircles6{
     margin-left: 40px; 
@@ -237,8 +284,4 @@ body {
 }
 
 
-h4 {
-    padding: 0px 10px;
-    font-size: 32px;
-}
 
