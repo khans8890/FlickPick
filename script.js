@@ -388,18 +388,23 @@ async function getRandomMovie(genreId) {
       }
       // console.log(randomMovie);
       let randomPost = randomMovie.poster_path;
-      randomPoster.src = `https://image.tmdb.org/t/p/original${randomPost}`;
       randomTitle.innerText = `${randomMovie.title} \n \n Rating: ${randomMovie.vote_average}/10 \n \n Voted: ${randomMovie.vote_count} \n \n ${randomMovie.overview}`;
-      randomPoster.style.width = "500px";
-      randomPoster.style.height = "500px";
-      randomMovie.style.cssText = 
-        `display:flex;
-        font-size: 16px;
-        justify-content: left;
-        text-align: left;
-        padding: 25px;
-        `;
+      randomPoster.src = `https://image.tmdb.org/t/p/original${randomPost}`;
+      randomPoster.style.width = "400px";
+      randomPoster.style.height = "600px";
+      randomTitle.style.cssText = `
+      color: white;
+      width:200px;
+      height:200px;
+      padding:30px;`;
     });
+    randomMovie.style.cssText = `
+          display:flex;
+          font-size: 16px;
+          justify-content: left;  
+          text-align: left;
+          padding: 20px;  
+          `;
   }
 }
 
@@ -428,30 +433,33 @@ async function fetchMovie(genreId) {
   console.log(posterImg);
   posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`;
   movieTitle.innerText = `${movieData.title} \n \n Rating: ${movieData.vote_average}/10 \n \n Voted: ${movieData.vote_count} \n \n ${movieData.overview}`;
+  movieTitle.style.cssText = `
+      color:white;
+      width:200px;
+      height:200px;
+      padding:30px;`;
   poster.style.width = "400px";
-  poster.style.height = "500px";
-  movieContain.append(randomMovieButton);
-
-  let videoYt = await fetch(
-    `https://youtube138.p.rapidapi.com/search/?q=${movieData.title}movie&trailer`,
-    options
-  );
-  let videoJson = await videoYt.json();
-  let videoData = await videoJson;
-  console.log(videoData);
-  console.log(videoData.contents);
-  let videoLink = videoData.contents[0].video.videoId;
-  videoFrame.src = `https://www.youtube.com/embed/${videoLink}`;
-
-
-  movieContain.style.cssText = 
-          `display:flex;
+  poster.style.height = "600px";
+  movieContain.style.cssText = `
+          display:flex;
           font-size: 16px;
           justify-content: left;
           text-align: left;
-          padding: 25px;
-          font-family: 
+          padding: 20px;  
           `;
+  movieContain.append(randomMovieButton);
+
+  // let videoYt = await fetch(
+  //   `https://youtube138.p.rapidapi.com/search/?q=${movieData.title}movie&trailer`,
+  //   options
+  // );
+  // let videoJson = await videoYt.json();
+  // let videoData = await videoJson;
+  // console.log(videoData);
+  // console.log(videoData.contents);
+  // let videoLink = videoData.contents[0].video.videoId;
+  // videoFrame.src = `https://www.youtube.com/embed/${videoLink}`;
+
   randomMovieButton.innerText = "New Flick";
   randomMovieButton.style.cssText = `font-size: 12px; 
           background-color: white;
