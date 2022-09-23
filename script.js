@@ -10,7 +10,7 @@ const q6Contain = document.getElementById("q-6-container");
 const nextSix = document.getElementById("next-6");
 const movieContain = document.getElementById("movie-rec-container");
 const movieRec = document.querySelectorAll(".movieRec");
-const overlay = document.getElementById("overlay")
+const overlay = document.getElementById("overlay");
 
 const cells = document.querySelectorAll(".cell");
 const cellsTwo = document.querySelectorAll(".cell-q2");
@@ -275,7 +275,7 @@ nextFive.addEventListener("click", (e) => {
         : (genreId = 28)
     );
     fetchMovie(genreId);
-    analysis(genreId);
+    // analysis(genreId);
   } else {
     console.log("Break this Tie");
     q5Contain.style.display = "none";
@@ -349,7 +349,7 @@ nextSix.addEventListener("click", (e) => {
 const options = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "483126c32amsh524fdc002e0512ep1528c2jsn17c3de5b89b1",
+    "X-RapidAPI-Key": "6acb566dc7msh6aa07c069428351p12fa2ejsn49fc3821deb2",
     "X-RapidAPI-Host": "youtube138.p.rapidapi.com",
   },
 };
@@ -367,34 +367,33 @@ async function getRandomMovie(genreId) {
       for (let i = 0; i < movieRec.length; i++) {
         movieRec[i].style.display = "none";
       }
-      await fetch(
+      let movieApi = await fetch(
         `https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}&page=${page}`,
         requestOptions
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          data.results;
-          console.log(data.results);
-          let randomMovie;
-          let randomAmount = Math.floor(Math.random() * data.results.length);
-          console.log(randomAmount);
-          //Display the random movies only > 7 and more than 500 votes
-          for (let i = 0; i < randomAmount + 1; i++) {
-            if (
-              data.results[i].vote_average > 7.0 &&
-              data.results[i].vote_count > 500
-            ) {
-              randomMovie = data.results[i];
-            }
-          }
-          // console.log(randomMovie);
-          let randomPost = randomMovie.poster_path;
-          randomPoster.src = `https://image.tmdb.org/t/p/original${randomPost}`;
-          randomTitle.innerText = `${randomMovie.title} \n \n Rating: ${randomMovie.vote_average}/10 \n \n Voted: ${randomMovie.vote_count} \n \n ${randomMovie.overview}`;
-          randomPoster.style.width = "500px";
-          randomPoster.style.height = "500px";
-        });
-      randomMovie.style.cssText = `display:flex;
+      );
+      let movieApiJson = await movieApi.json();
+      let dataInfo = await movieApiJson;
+      console.log(dataInfo);
+      let randomMovie;
+      let randomAmount = Math.floor(Math.random() * dataInfo.results.length);
+      console.log(randomAmount);
+      //Display the random movies only > 7 and more than 500 votes
+      for (let i = 0; i < randomAmount + 1; i++) {
+        if (
+          dataInfo.results[i].vote_average > 7.0 &&
+          dataInfo.results[i].vote_count > 500
+        ) {
+          randomMovie = dataInfo.results[i];
+        }
+      }
+      // console.log(randomMovie);
+      let randomPost = randomMovie.poster_path;
+      randomPoster.src = `https://image.tmdb.org/t/p/original${randomPost}`;
+      randomTitle.innerText = `${randomMovie.title} \n \n Rating: ${randomMovie.vote_average}/10 \n \n Voted: ${randomMovie.vote_count} \n \n ${randomMovie.overview}`;
+      randomPoster.style.width = "500px";
+      randomPoster.style.height = "500px";
+      randomMovie.style.cssText = 
+        `display:flex;
         font-size: 16px;
         justify-content: left;
         text-align: left;
@@ -406,59 +405,55 @@ async function getRandomMovie(genreId) {
 
 async function fetchMovie(genreId) {
   getRandomMovie(genreId);
-  // analysis(genreId)
-  //Fetching the top rated movie of page 1
-  fetch(
+  let response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}&page=1`,
     requestOptions
-  )
-    .then((response) => response.json())
-    .then((data) =>
-      //This to fetch the highest rating and output as the 1st appearance
-      {
-        data.results;
-        let rate = 0;
-        let movieData;
-        for (let i = 0; i < data.results.length; i++) {
-          if (
-            data.results[i].vote_average > rate &&
-            data.results[i].vote_count > 500
-          ) {
-            rate = data.results[i].vote_average;
-            movieData = data.results[i];
-          }
-        }
-        fetch(
-          `https://youtube138.p.rapidapi.com/search/?q=${movieData.title}movie&trailer`,
-          options
-        )
-          .then((response) => response.json())
-          .then((videoData) => {
-            console.log(videoData);
-            console.log(videoData.contents);
-            // for(let i = 0; i < videoData.contents.length;i++){
-            // if(videoData.contents[i].video.title.includes("Trailer")) {
-            let videoLink = videoData.contents[0].video.videoId;
-            videoFrame.src = `https://www.youtube.com/embed/${videoLink}`;
-          });
-        //Display Top Rate Movie
-        console.log(movieData);
-        let posterPath = movieData.poster_path;
-        console.log(posterImg);
-        posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`;
-        movieTitle.innerText = `${movieData.title} \n \n Rating: ${movieData.vote_average}/10 \n \n Voted: ${movieData.vote_count} \n \n ${movieData.overview}`;
-        poster.style.width = "400px";
-        poster.style.height = "500px";
-        movieContain.append(randomMovieButton);
-        movieContain.style.cssText = `display:flex;
+  );
+  let rate = 0;
+  let movieData;
+  let json = await response.json();
+  let data = await json;
+  console.log(data);
+  for (let i = 0; i < data.results.length; i++) {
+    if (
+      data.results[i].vote_average > rate &&
+      data.results[i].vote_count > 500
+    ) {
+      rate = data.results[i].vote_average;
+      movieData = data.results[i];
+    }
+  }
+  console.log(movieData);
+  let posterPath = movieData.poster_path;
+  console.log(posterImg);
+  posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`;
+  movieTitle.innerText = `${movieData.title} \n \n Rating: ${movieData.vote_average}/10 \n \n Voted: ${movieData.vote_count} \n \n ${movieData.overview}`;
+  poster.style.width = "400px";
+  poster.style.height = "500px";
+  movieContain.append(randomMovieButton);
+
+  let videoYt = await fetch(
+    `https://youtube138.p.rapidapi.com/search/?q=${movieData.title}movie&trailer`,
+    options
+  );
+  let videoJson = await videoYt.json();
+  let videoData = await videoJson;
+  console.log(videoData);
+  console.log(videoData.contents);
+  let videoLink = videoData.contents[0].video.videoId;
+  videoFrame.src = `https://www.youtube.com/embed/${videoLink}`;
+
+
+  movieContain.style.cssText = 
+          `display:flex;
           font-size: 16px;
           justify-content: left;
           text-align: left;
           padding: 25px;
           font-family: 
           `;
-        randomMovieButton.innerText = "New Flick";
-        randomMovieButton.style.cssText = `font-size: 12px; 
+  randomMovieButton.innerText = "New Flick";
+  randomMovieButton.style.cssText = `font-size: 12px; 
           background-color: white;
           border: none;
           border-radius: 15px;
@@ -469,8 +464,6 @@ async function fetchMovie(genreId) {
           color: black;
           transition: all 0.5s ease 0s;
         `;
-      }
-    );
 }
 
 // function analysis(genreId) {
