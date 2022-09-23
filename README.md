@@ -3,9 +3,10 @@ A website that reduces the time a user wastes perusing through a streaming servi
 
 
 ***Team:***
-* Product Manager: Ana
-* Developer: Caston
-* Developer: Jowel
+* Product Manager: Sumaira 
+* Developer: Sumaira
+* Developer: Richard 
+* Developer: Evan
 ***Tech Stack:***
 * Frontend: HTML, CSS, Javascript
 
