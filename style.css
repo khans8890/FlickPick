@@ -10,32 +10,32 @@ body {
 
 @keyframes changeBg {
     0% {
-        background-image: url(seaBg.png);
+        background-image: url(backgroundPngs/seaBg.png);
         background-size: cover;
     }
 
     20% {
-        background-image: url(deepSeaBg.png);
+        background-image: url(backgroundPngs/deepSeaBg.png);
         background-size: cover;
     }
 
     40% {
-        background-image: url(bloomBg.png);
+        background-image: url(backgroundPngs/bloomBg.png);
         background-size: cover;
     }
 
     60% {
-        background-image: url(orangeBg.png);
+        background-image: url(backgroundPngs/orangeBg.png);
         background-size: cover;
     }
 
     80% {
-        background-image: url(sunsetBg.png);
+        background-image: url(backgroundPngs/sunsetBg.png);
         background-size: cover;
     }
 
     100% {
-        background-image: url(seaBg.png);
+        background-image: url(backgroundPngs/seaBg.png);
         background-size: cover;
     }
 }
@@ -516,7 +516,7 @@ h4 {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
 }
 #q-6-head {
     font-size: 35px;
