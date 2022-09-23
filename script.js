@@ -1,4 +1,3 @@
-
 // DOM Elements
 const startButton = document.getElementById("s-button");
 const introContain = document.getElementById("intro-container");
@@ -11,6 +10,7 @@ const q6Contain = document.getElementById("q-6-container");
 const nextSix = document.getElementById("next-6");
 const movieContain = document.getElementById("movie-rec-container");
 const movieRec = document.querySelectorAll(".movieRec");
+const overlay = document.getElementById("overlay")
 
 const cells = document.querySelectorAll(".cell");
 const cellsTwo = document.querySelectorAll(".cell-q2");
@@ -43,6 +43,7 @@ window.addEventListener("DOMContentLoaded", () => {
   q4Contain.style.display = "none";
   q5Contain.style.display = "none";
   q6Contain.style.display = "none";
+  psychoanalysis.style.display = "none";
   nextOne.disabled = true;
   nextTwo.disabled = true;
   nextThree.disabled = true;
@@ -71,7 +72,6 @@ const posterImg = document.getElementById(`poster`);
 const overviewSection = document.getElementById("overview");
 //YT API
 const videoFrame = document.querySelector("iframe");
-
 
 document
   .getElementById("romance-1")
@@ -164,20 +164,20 @@ nextOne.addEventListener("click", (e) => {
       answChoice1.id == "romance-1"
         ? romanceCount++
         : answChoice1.id == "comedy-1"
-          ? comedyCount++
-          : answChoice1.id == "horror-1"
-            ? horrorCount++
-            : actionCount++;
+        ? comedyCount++
+        : answChoice1.id == "horror-1"
+        ? horrorCount++
+        : actionCount++;
       break;
     }
   }
   romanceCount === genreCount
     ? (genreId = 10749)
     : comedyCount == genreCount
-      ? (genreId = 35)
-      : horrorCount == genreCount
-        ? (genreId = 27)
-        : (genreId = 28)
+    ? (genreId = 35)
+    : horrorCount == genreCount
+    ? (genreId = 27)
+    : (genreId = 28);
 });
 
 nextTwo.addEventListener("click", (e) => {
@@ -189,10 +189,10 @@ nextTwo.addEventListener("click", (e) => {
       answChoice2.id == "romance-2"
         ? romanceCount++
         : answChoice2.id == "comedy-2"
-          ? comedyCount++
-          : answChoice2.id == "horror-2"
-            ? horrorCount++
-            : actionCount++;
+        ? comedyCount++
+        : answChoice2.id == "horror-2"
+        ? horrorCount++
+        : actionCount++;
       break;
     }
   }
@@ -208,10 +208,10 @@ nextThree.addEventListener("click", (e) => {
       answChoice3.id == "romance-3"
         ? romanceCount++
         : answChoice3.id == "comedy-3"
-          ? comedyCount++
-          : answChoice3.id == "horror-3"
-            ? horrorCount++
-            : actionCount++;
+        ? comedyCount++
+        : answChoice3.id == "horror-3"
+        ? horrorCount++
+        : actionCount++;
       break;
     }
   }
@@ -226,10 +226,10 @@ nextFour.addEventListener("click", (e) => {
       answChoice4.id == "romance-4"
         ? romanceCount++
         : answChoice4.id == "comedy-4"
-          ? comedyCount++
-          : answChoice4.id == "horror-4"
-            ? horrorCount++
-            : actionCount++;
+        ? comedyCount++
+        : answChoice4.id == "horror-4"
+        ? horrorCount++
+        : actionCount++;
       break;
     }
   }
@@ -245,10 +245,10 @@ nextFive.addEventListener("click", (e) => {
       answChoice5.id == "romance-5"
         ? romanceCount++
         : answChoice5.id == "comedy-5"
-          ? comedyCount++
-          : answChoice5.id == "horror-5"
-            ? horrorCount++
-            : actionCount++;
+        ? comedyCount++
+        : answChoice5.id == "horror-5"
+        ? horrorCount++
+        : actionCount++;
       console.log(romanceCount);
       console.log(comedyCount);
       console.log(horrorCount);
@@ -269,12 +269,13 @@ nextFive.addEventListener("click", (e) => {
       romanceCount === genreCount
         ? (genreId = 10749)
         : comedyCount == genreCount
-          ? (genreId = 35)
-          : horrorCount == genreCount
-            ? (genreId = 27)
-            : (genreId = 28)
+        ? (genreId = 35)
+        : horrorCount == genreCount
+        ? (genreId = 27)
+        : (genreId = 28)
     );
     fetchMovie(genreId);
+    analysis(genreId);
   } else {
     console.log("Break this Tie");
     q5Contain.style.display = "none";
@@ -319,10 +320,10 @@ nextSix.addEventListener("click", (e) => {
       answChoice6.id == "romance-6"
         ? romanceCount++
         : answChoice6.id == "comedy-6"
-          ? comedyCount++
-          : answChoice6.id == "horror-6"
-            ? horrorCount++
-            : actionCount++;
+        ? comedyCount++
+        : answChoice6.id == "horror-6"
+        ? horrorCount++
+        : actionCount++;
       console.log("Romance is", romanceCount);
       console.log("Comedy is", comedyCount);
       console.log("Horror is", horrorCount);
@@ -330,20 +331,16 @@ nextSix.addEventListener("click", (e) => {
       break;
     }
   }
-  genreCount = Math.max(
-    romanceCount,
-    comedyCount,
-    horrorCount,
-    actionCount)
+  genreCount = Math.max(romanceCount, comedyCount, horrorCount, actionCount);
 
   console.log(
     romanceCount === genreCount
       ? (genreId = 10749)
       : comedyCount == genreCount
-        ? (genreId = 35)
-        : horrorCount == genreCount
-          ? (genreId = 27)
-          : (genreId = 28)
+      ? (genreId = 35)
+      : horrorCount == genreCount
+      ? (genreId = 27)
+      : (genreId = 28)
   );
   q6Contain.style.display = "none";
   fetchMovie(genreId);
@@ -362,11 +359,11 @@ const requestOptions = {
   redirect: "follow",
 };
 
+//Giving Users a random movie of the same genre logic
 async function getRandomMovie(genreId) {
   for (let page = 1; page <= 5; page++) {
     randomMovieButton.addEventListener("click", async (e) => {
       videoFrame.src = "";
-      psychoanalysis.innerText  = "";
       for (let i = 0; i < movieRec.length; i++) {
         movieRec[i].style.display = "none";
       }
@@ -381,9 +378,12 @@ async function getRandomMovie(genreId) {
           let randomMovie;
           let randomAmount = Math.floor(Math.random() * data.results.length);
           console.log(randomAmount);
-          //Display the randomm movies only > 7
+          //Display the random movies only > 7 and more than 500 votes
           for (let i = 0; i < randomAmount + 1; i++) {
-            if (data.results[i].vote_average > 7.0 && data.results[i].vote_count > 500) {
+            if (
+              data.results[i].vote_average > 7.0 &&
+              data.results[i].vote_count > 500
+            ) {
               randomMovie = data.results[i];
             }
           }
@@ -393,14 +393,13 @@ async function getRandomMovie(genreId) {
           randomTitle.innerText = `${randomMovie.title} \n \n Rating: ${randomMovie.vote_average}/10 \n \n Voted: ${randomMovie.vote_count} \n \n ${randomMovie.overview}`;
           randomPoster.style.width = "500px";
           randomPoster.style.height = "500px";
-        })
-      randomMovie.style.cssText =
-        `display:flex;
+        });
+      randomMovie.style.cssText = `display:flex;
         font-size: 16px;
         justify-content: left;
         text-align: left;
         padding: 25px;
-        `
+        `;
     });
   }
 }
@@ -415,102 +414,78 @@ async function fetchMovie(genreId) {
   )
     .then((response) => response.json())
     .then((data) =>
-    //This to fetch the highest rating and output as the 1st appearence
-    {
-      data.results;
-      let rate = 0;
-      let movieData;
-      for (let i = 0; i < data.results.length; i++) {
-        if (data.results[i].vote_average > rate && data.results[i].vote_count > 500) {
-          rate = data.results[i].vote_average;
-          movieData = data.results[i];
+      //This to fetch the highest rating and output as the 1st appearance
+      {
+        data.results;
+        let rate = 0;
+        let movieData;
+        for (let i = 0; i < data.results.length; i++) {
+          if (
+            data.results[i].vote_average > rate &&
+            data.results[i].vote_count > 500
+          ) {
+            rate = data.results[i].vote_average;
+            movieData = data.results[i];
+          }
         }
-      }
-      fetch(
-  `https://youtube138.p.rapidapi.com/search/?q=${movieData.title}movie&trailer`,
-  options
-)
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-    console.log(data.contents);
-    let videoLink = data.contents[0].video.videoId;
-    console.log(videoLink);
-    videoFrame.src = `https://www.youtube.com/embed/${videoLink}`;
-  });
-  fetch(
-    `https://youtube138.p.rapidapi.com/search/?q=${movieData.title}movie&trailer`,
-    options
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      console.log(data.contents);
-      let videoLink = data.contents[0].video.videoId;
-      console.log(videoLink);
-      videoFrame.src = `https://www.youtube.com/embed/${videoLink}`;
-    });
-      //Display Top Rate Movie
-      console.log(movieData);
-      let posterPath = movieData.poster_path;
-      console.log(posterImg);
-      posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`;
-      movieTitle.innerText = `${movieData.title} \n \n Rating: ${movieData.vote_average}/10 \n \n Voted: ${movieData.vote_count} \n \n ${movieData.overview}`;
-      poster.style.width = "500px";
-      poster.style.height = "500px";
-      movieContain.append(randomMovieButton);
-      movieContain.style.cssText =
-        `display:flex;
+        fetch(
+          `https://youtube138.p.rapidapi.com/search/?q=${movieData.title}movie&trailer`,
+          options
+        )
+          .then((response) => response.json())
+          .then((videoData) => {
+            console.log(videoData);
+            console.log(videoData.contents);
+            // for(let i = 0; i < videoData.contents.length;i++){
+            // if(videoData.contents[i].video.title.includes("Trailer")) {
+            let videoLink = videoData.contents[0].video.videoId;
+            videoFrame.src = `https://www.youtube.com/embed/${videoLink}`;
+          });
+        //Display Top Rate Movie
+        console.log(movieData);
+        let posterPath = movieData.poster_path;
+        console.log(posterImg);
+        posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`;
+        movieTitle.innerText = `${movieData.title} \n \n Rating: ${movieData.vote_average}/10 \n \n Voted: ${movieData.vote_count} \n \n ${movieData.overview}`;
+        poster.style.width = "400px";
+        poster.style.height = "500px";
+        movieContain.append(randomMovieButton);
+        movieContain.style.cssText = `display:flex;
           font-size: 16px;
           justify-content: left;
           text-align: left;
           padding: 25px;
           font-family: 
-          `
-      randomMovieButton.innerText =
-        "New Flick";
-      randomMovieButton.style.cssText =
-        `font-size: 12px; 
-        text-shadow:
-          0 0 7px #fff,
-          0 0 10px #fff,
-          0 0 21px #fff,
-          0 0 42px #5271ff,
-          0 0 82px #5271ff,
-          0 0 92px #5271ff,
-          0 0 102px #5271ff,
-          0 0 151px #5271ff;
+          `;
+        randomMovieButton.innerText = "New Flick";
+        randomMovieButton.style.cssText = `font-size: 12px; 
           background-color: white;
           border: none;
           border-radius: 15px;
           cursor: pointer;
-          transition: all 0.3s ease 0s;
           box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-        width: 150px;
-        height: 50px;
-        color: black;
-        transition: all 0.5s ease 0s;
-        `
-    }
+          width: 150px;
+          height: 50px;
+          color: black;
+          transition: all 0.5s ease 0s;
+        `;
+      }
     );
 }
 
-
 // function analysis(genreId) {
 //   if (genreId == 10479) {
-//     psychoanalysis.innerText = "You're a romantic at heart, chasing love where you see it and if you don't see it you create it. We have the just film for your romantic tendencies.";
-//     movieContain.append(psychoanalysis);
-//     console.log(psychoanalysis)
-
+//     psychoanalysis.innerText =
+//       "You're a romantic at heart, chasing love where you see it and if you don't see it you create it. We have the just film for your romantic tendencies.";
+//     console.log(psychoanalysis);
 //   } else if (genreId == 35) {
-//     psychoanalysis.innerText = "A comic in every room you're in, you make the ones around you laugh, sparking joy everywhere you go. At times, you are a bit immature but no one takes it to heart when the jokes are good, we have the film guaranteed to make you laugh."
-//     movieContain.append(psychoanalysis);
+//     psychoanalysis.innerText =
+//       "A comic in every room you're in, you make the ones around you laugh, sparking joy everywhere you go. At times, you are a bit immature but no one takes it to heart when the jokes are good, we have the film guaranteed to make you laugh.";
 //   } else if (genreId == 27) {
-//     psychoanalysis.innerText = "You're a thrill seeker and enjoy living life on the edge. We have just the film to keep you on the edge of your seat."
-//     movieContain.append(psychoanalysis);
+//     psychoanalysis.innerText =
+//       "You're a thrill seeker and enjoy living life on the edge. We have just the film to keep you on the edge of your seat.";
 //   } else {
-//     psychoanalysis.innerText = "A hero at heart, you often daydream about saving everyone around you. Live vicariously through this film and be the hero you always want to be."
-//     movieContain.append(psychoanalysis);
+//     psychoanalysis.innerText =
+//       "A hero at heart, you often daydream about saving everyone around you. Live vicariously through this film and be the hero you always want to be.";
 //   }
 // }
-
