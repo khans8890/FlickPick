@@ -352,7 +352,7 @@ nextSix.addEventListener("click", (e) => {
 const options = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "6acb566dc7msh6aa07c069428351p12fa2ejsn49fc3821deb2",
+    "X-RapidAPI-Key": "bd09244eacmsh340c339682f4ebep1effb4jsn564e406f99fc",
     "X-RapidAPI-Host": "youtube138.p.rapidapi.com",
   },
 };
@@ -391,7 +391,7 @@ async function getRandomMovie(genreId) {
       }
       // console.log(randomMovie);
       let randomPost = randomMovie.poster_path;
-      randomTitle.innerText = `${randomMovie.title} \n \n Rating: ${randomMovie.vote_average}/10 \n \n Voted: ${randomMovie.vote_count} \n \n ${randomMovie.overview}`;
+      randomTitle.innerText = `${randomMovie.title} \n \n Rating: ${randomMovie.vote_average} /10 \n \n Voted: ${randomMovie.vote_count} \n \n ${randomMovie.overview}`;
       randomPoster.src = `https://image.tmdb.org/t/p/original${randomPost}`;
       randomPoster.style.width = "400px";
       randomPoster.style.height = "600px";
@@ -435,7 +435,7 @@ async function fetchMovie(genreId) {
   let posterPath = movieData.poster_path;
   console.log(posterImg);
   posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`;
-  movieTitle.innerText = `${movieData.title} \n \n Rating: ${movieData.vote_average}/10 \n \n Voted: ${movieData.vote_count} \n \n ${movieData.overview}`;
+  movieTitle.innerText = `${movieData.title} \n \n Rating: ${movieData.vote_average} /10 \n \n Voted: ${movieData.vote_count} \n \n ${movieData.overview}`;
   movieTitle.style.cssText = `
       color:white;
       width:200px;
@@ -451,18 +451,21 @@ async function fetchMovie(genreId) {
           padding: 20px;  
           `;
   movieContain.append(randomMovieButton);
-
-  // let videoYt = await fetch(
-  //   `https://youtube138.p.rapidapi.com/search/?q=${movieData.title}movie&trailer`,
-  //   options
-  // );
-  // let videoJson = await videoYt.json();
-  // let videoData = await videoJson;
-  // console.log(videoData);
-  // console.log(videoData.contents);
-  // let videoLink = videoData.contents[0].video.videoId;
-  // videoFrame.src = `https://www.youtube.com/embed/${videoLink}`;
-
+  let videoYt = await fetch(
+    `https://youtube138.p.rapidapi.com/search/?q=${movieData.title}movie&trailer`,
+    options
+  );
+  let videoJson = await videoYt.json();
+  let videoData = await videoJson;
+  console.log(videoData);
+  console.log(videoData.contents);
+  let videoLink = await videoData.contents[0].video.videoId;
+  videoFrame.src = `https://www.youtube.com/embed/${videoLink}`;
+  videoFrame.style.cssText =
+  `height:600px;
+  width:800px;
+  border: 3px solid black;
+  `
   randomMovieButton.innerText = "New Flick";
   randomMovieButton.style.cssText = `font-size: 12px; 
           background-color: white;
