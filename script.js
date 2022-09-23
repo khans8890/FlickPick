@@ -10,7 +10,10 @@ const q6Contain = document.getElementById("q-6-container");
 const nextSix = document.getElementById("next-6");
 const movieContain = document.getElementById("movie-rec-container");
 const movieRec = document.querySelectorAll(".movieRec");
-const overlay = document.getElementById("overlay")
+const overlay = document.getElementById("overlay");
+const modal = document.getElementById("myModal");
+const span = document.getElementsByClassName("close")[0];
+
 
 const cells = document.querySelectorAll(".cell");
 const cellsTwo = document.querySelectorAll(".cell-q2");
@@ -43,7 +46,6 @@ window.addEventListener("DOMContentLoaded", () => {
   q4Contain.style.display = "none";
   q5Contain.style.display = "none";
   q6Contain.style.display = "none";
-  psychoanalysis.style.display = "none";
   nextOne.disabled = true;
   nextTwo.disabled = true;
   nextThree.disabled = true;
@@ -344,12 +346,13 @@ nextSix.addEventListener("click", (e) => {
   );
   q6Contain.style.display = "none";
   fetchMovie(genreId);
+  analysis(genreId)
 });
 
 const options = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "483126c32amsh524fdc002e0512ep1528c2jsn17c3de5b89b1",
+    "X-RapidAPI-Key": "bd09244eacmsh340c339682f4ebep1effb4jsn564e406f99fc",
     "X-RapidAPI-Host": "youtube138.p.rapidapi.com",
   },
 };
@@ -367,98 +370,104 @@ async function getRandomMovie(genreId) {
       for (let i = 0; i < movieRec.length; i++) {
         movieRec[i].style.display = "none";
       }
-      await fetch(
+      let movieApi = await fetch(
         `https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}&page=${page}`,
         requestOptions
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          data.results;
-          console.log(data.results);
-          let randomMovie;
-          let randomAmount = Math.floor(Math.random() * data.results.length);
-          console.log(randomAmount);
-          //Display the random movies only > 7 and more than 500 votes
-          for (let i = 0; i < randomAmount + 1; i++) {
-            if (
-              data.results[i].vote_average > 7.0 &&
-              data.results[i].vote_count > 500
-            ) {
-              randomMovie = data.results[i];
-            }
-          }
-          // console.log(randomMovie);
-          let randomPost = randomMovie.poster_path;
-          randomPoster.src = `https://image.tmdb.org/t/p/original${randomPost}`;
-          randomTitle.innerText = `${randomMovie.title} \n \n Rating: ${randomMovie.vote_average}/10 \n \n Voted: ${randomMovie.vote_count} \n \n ${randomMovie.overview}`;
-          randomPoster.style.width = "500px";
-          randomPoster.style.height = "500px";
-        });
-      randomMovie.style.cssText = `display:flex;
-        font-size: 16px;
-        justify-content: left;
-        text-align: left;
-        padding: 25px;
-        `;
+      );
+      let movieApiJson = await movieApi.json();
+      let dataInfo = await movieApiJson;
+      console.log(dataInfo);
+      let randomMovie;
+      let randomAmount = Math.floor(Math.random() * dataInfo.results.length);
+      console.log(randomAmount);
+      //Display the random movies only > 7 and more than 500 votes
+      for (let i = 0; i < randomAmount + 1; i++) {
+        if (
+          dataInfo.results[i].vote_average > 7.0 &&
+          dataInfo.results[i].vote_count > 500
+        ) {
+          randomMovie = dataInfo.results[i];
+        }
+      }
+      // console.log(randomMovie);
+      let randomPost = randomMovie.poster_path;
+      randomTitle.innerText = `${randomMovie.title} \n \n Rating: ${randomMovie.vote_average} /10 \n \n Voted: ${randomMovie.vote_count} \n \n ${randomMovie.overview}`;
+      randomPoster.src = `https://image.tmdb.org/t/p/original${randomPost}`;
+      randomPoster.style.width = "400px";
+      randomPoster.style.height = "600px";
+      randomTitle.style.cssText = `
+      color: white;
+      width:200px;
+      height:200px;
+      padding:30px;`;
     });
+    randomMovie.style.cssText = `
+          display:flex;
+          font-size: 16px;
+          justify-content: left;  
+          text-align: left;
+          padding: 20px;  
+          `;
   }
 }
 
 async function fetchMovie(genreId) {
   getRandomMovie(genreId);
-  // analysis(genreId)
-  //Fetching the top rated movie of page 1
-  fetch(
+  let response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=f028604464a18dd7147f53c6c663519f&with_genres=${genreId}&page=1`,
     requestOptions
-  )
-    .then((response) => response.json())
-    .then((data) =>
-      //This to fetch the highest rating and output as the 1st appearance
-      {
-        data.results;
-        let rate = 0;
-        let movieData;
-        for (let i = 0; i < data.results.length; i++) {
-          if (
-            data.results[i].vote_average > rate &&
-            data.results[i].vote_count > 500
-          ) {
-            rate = data.results[i].vote_average;
-            movieData = data.results[i];
-          }
-        }
-        fetch(
-          `https://youtube138.p.rapidapi.com/search/?q=${movieData.title}movie&trailer`,
-          options
-        )
-          .then((response) => response.json())
-          .then((videoData) => {
-            console.log(videoData);
-            console.log(videoData.contents);
-            // for(let i = 0; i < videoData.contents.length;i++){
-            // if(videoData.contents[i].video.title.includes("Trailer")) {
-            let videoLink = videoData.contents[0].video.videoId;
-            videoFrame.src = `https://www.youtube.com/embed/${videoLink}`;
-          });
-        //Display Top Rate Movie
-        console.log(movieData);
-        let posterPath = movieData.poster_path;
-        console.log(posterImg);
-        posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`;
-        movieTitle.innerText = `${movieData.title} \n \n Rating: ${movieData.vote_average}/10 \n \n Voted: ${movieData.vote_count} \n \n ${movieData.overview}`;
-        poster.style.width = "400px";
-        poster.style.height = "500px";
-        movieContain.append(randomMovieButton);
-        movieContain.style.cssText = `display:flex;
+  );
+  let rate = 0;
+  let movieData;
+  let json = await response.json();
+  let data = await json;
+  console.log(data);
+  for (let i = 0; i < data.results.length; i++) {
+    if (
+      data.results[i].vote_average > rate &&
+      data.results[i].vote_count > 500
+    ) {
+      rate = data.results[i].vote_average;
+      movieData = data.results[i];
+    }
+  }
+  console.log(movieData);
+  let posterPath = movieData.poster_path;
+  console.log(posterImg);
+  posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`;
+  movieTitle.innerText = `${movieData.title} \n \n Rating: ${movieData.vote_average} /10 \n \n Voted: ${movieData.vote_count} \n \n ${movieData.overview}`;
+  movieTitle.style.cssText = `
+      color:white;
+      width:200px;
+      height:200px;
+      padding:30px;`;
+  poster.style.width = "400px";
+  poster.style.height = "600px";
+  movieContain.style.cssText = `
+          display:flex;
           font-size: 16px;
           justify-content: left;
           text-align: left;
-          padding: 25px;
-          font-family: 
+          padding: 20px;  
           `;
-        randomMovieButton.innerText = "New Flick";
-        randomMovieButton.style.cssText = `font-size: 12px; 
+  movieContain.append(randomMovieButton);
+  let videoYt = await fetch(
+    `https://youtube138.p.rapidapi.com/search/?q=${movieData.title}movie&trailer`,
+    options
+  );
+  let videoJson = await videoYt.json();
+  let videoData = await videoJson;
+  console.log(videoData);
+  console.log(videoData.contents);
+  let videoLink = await videoData.contents[0].video.videoId;
+  videoFrame.src = `https://www.youtube.com/embed/${videoLink}`;
+  videoFrame.style.cssText =
+  `height:600px;
+  width:800px;
+  border: 3px solid black;
+  `
+  randomMovieButton.innerText = "New Flick";
+  randomMovieButton.style.cssText = `font-size: 12px; 
           background-color: white;
           border: none;
           border-radius: 15px;
@@ -469,23 +478,35 @@ async function fetchMovie(genreId) {
           color: black;
           transition: all 0.5s ease 0s;
         `;
-      }
-    );
 }
 
-// function analysis(genreId) {
-//   if (genreId == 10479) {
-//     psychoanalysis.innerText =
-//       "You're a romantic at heart, chasing love where you see it and if you don't see it you create it. We have the just film for your romantic tendencies.";
-//     console.log(psychoanalysis);
-//   } else if (genreId == 35) {
-//     psychoanalysis.innerText =
-//       "A comic in every room you're in, you make the ones around you laugh, sparking joy everywhere you go. At times, you are a bit immature but no one takes it to heart when the jokes are good, we have the film guaranteed to make you laugh.";
-//   } else if (genreId == 27) {
-//     psychoanalysis.innerText =
-//       "You're a thrill seeker and enjoy living life on the edge. We have just the film to keep you on the edge of your seat.";
-//   } else {
-//     psychoanalysis.innerText =
-//       "A hero at heart, you often daydream about saving everyone around you. Live vicariously through this film and be the hero you always want to be.";
-//   }
-// }
+function analysis(genreId) {
+  modal.style.display = "block";
+  if (genreId == 10479) {
+    psychoanalysis.innerText =
+      "You're a romantic at heart, chasing love where you see it and if you don't see it you create it. We have the just film for your romantic tendencies.";
+    console.log(psychoanalysis);
+  } else if (genreId == 35) {
+    psychoanalysis.innerText =
+      "A comic in every room you're in, you make the ones around you laugh, sparking joy everywhere you go. At times, you are a bit immature but no one takes it to heart when the jokes are good, we have the film guaranteed to make you laugh.";
+  } else if (genreId == 27) {
+    psychoanalysis.innerText =
+      "You're a thrill seeker and enjoy living life on the edge. We have just the film to keep you on the edge of your seat.";
+  } else {
+    psychoanalysis.innerText =
+      "A hero at heart, you often daydream about saving everyone around you. Live vicariously through this film and be the hero you always want to be.";
+  }
+}
+
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
