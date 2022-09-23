@@ -11,6 +11,9 @@ const nextSix = document.getElementById("next-6");
 const movieContain = document.getElementById("movie-rec-container");
 const movieRec = document.querySelectorAll(".movieRec");
 const overlay = document.getElementById("overlay");
+const modal = document.getElementById("myModal");
+const span = document.getElementsByClassName("close")[0];
+
 
 const cells = document.querySelectorAll(".cell");
 const cellsTwo = document.querySelectorAll(".cell-q2");
@@ -43,7 +46,6 @@ window.addEventListener("DOMContentLoaded", () => {
   q4Contain.style.display = "none";
   q5Contain.style.display = "none";
   q6Contain.style.display = "none";
-  psychoanalysis.style.display = "none";
   nextOne.disabled = true;
   nextTwo.disabled = true;
   nextThree.disabled = true;
@@ -275,7 +277,7 @@ nextFive.addEventListener("click", (e) => {
         : (genreId = 28)
     );
     fetchMovie(genreId);
-    // analysis(genreId);
+    analysis(genreId);
   } else {
     console.log("Break this Tie");
     q5Contain.style.display = "none";
@@ -344,6 +346,7 @@ nextSix.addEventListener("click", (e) => {
   );
   q6Contain.style.display = "none";
   fetchMovie(genreId);
+  analysis(genreId)
 });
 
 const options = {
@@ -474,19 +477,33 @@ async function fetchMovie(genreId) {
         `;
 }
 
-// function analysis(genreId) {
-//   if (genreId == 10479) {
-//     psychoanalysis.innerText =
-//       "You're a romantic at heart, chasing love where you see it and if you don't see it you create it. We have the just film for your romantic tendencies.";
-//     console.log(psychoanalysis);
-//   } else if (genreId == 35) {
-//     psychoanalysis.innerText =
-//       "A comic in every room you're in, you make the ones around you laugh, sparking joy everywhere you go. At times, you are a bit immature but no one takes it to heart when the jokes are good, we have the film guaranteed to make you laugh.";
-//   } else if (genreId == 27) {
-//     psychoanalysis.innerText =
-//       "You're a thrill seeker and enjoy living life on the edge. We have just the film to keep you on the edge of your seat.";
-//   } else {
-//     psychoanalysis.innerText =
-//       "A hero at heart, you often daydream about saving everyone around you. Live vicariously through this film and be the hero you always want to be.";
-//   }
-// }
+function analysis(genreId) {
+  modal.style.display = "block";
+  if (genreId == 10479) {
+    psychoanalysis.innerText =
+      "You're a romantic at heart, chasing love where you see it and if you don't see it you create it. We have the just film for your romantic tendencies.";
+    console.log(psychoanalysis);
+  } else if (genreId == 35) {
+    psychoanalysis.innerText =
+      "A comic in every room you're in, you make the ones around you laugh, sparking joy everywhere you go. At times, you are a bit immature but no one takes it to heart when the jokes are good, we have the film guaranteed to make you laugh.";
+  } else if (genreId == 27) {
+    psychoanalysis.innerText =
+      "You're a thrill seeker and enjoy living life on the edge. We have just the film to keep you on the edge of your seat.";
+  } else {
+    psychoanalysis.innerText =
+      "A hero at heart, you often daydream about saving everyone around you. Live vicariously through this film and be the hero you always want to be.";
+  }
+}
+
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
