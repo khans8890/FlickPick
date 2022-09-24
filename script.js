@@ -10,11 +10,8 @@ const q6Contain = document.getElementById("q-6-container");
 const nextSix = document.getElementById("next-6");
 const movieContain = document.getElementById("movie-rec-container");
 const movieRec = document.querySelectorAll(".movieRec");
-const overlay = document.getElementById("overlay");
 const modal = document.getElementById("myModal");
 const span = document.getElementsByClassName("close")[0];
-
-
 const cells = document.querySelectorAll(".cell");
 const cellsTwo = document.querySelectorAll(".cell-q2");
 const cellsThree = document.querySelectorAll(".cell-q3");
@@ -32,6 +29,18 @@ const randomTitle = document.getElementById("randomTitle");
 const randomPoster = document.getElementById("randomPoster");
 const randomOverview = document.getElementById("random-overview");
 
+//GenreDivs
+const romanceDiv = document.getElementById("romance-q6-container");
+const comedyDiv = document.getElementById("comedy-q6-container");
+const horrorDiv = document.getElementById("horror-q6-container");
+const actionDiv = document.getElementById("action-q6-container");
+//Working to fetch genre
+const movieTitle = document.getElementById("title");
+const posterImg = document.getElementById(`poster`);
+const overviewSection = document.getElementById("overview");
+//YT API
+const videoFrame = document.querySelector("iframe");
+//AnswerChoices
 let answChoices1 = document.querySelectorAll('input[name="choice-1"]');
 let answChoices2 = document.querySelectorAll('input[name="choice-2"]');
 let answChoices3 = document.querySelectorAll('input[name="choice-3"]');
@@ -53,27 +62,6 @@ window.addEventListener("DOMContentLoaded", () => {
   nextFive.disabled = true;
   nextSix.disabled = true;
 });
-
-// Variables
-let romanceCount = 0;
-let comedyCount = 0;
-let horrorCount = 0;
-let actionCount = 0;
-let countArr = [];
-let genreId = 0;
-let genreCount = 0;
-//GenreDivs
-const romanceDiv = document.getElementById("romance-q6-container");
-const comedyDiv = document.getElementById("comedy-q6-container");
-const horrorDiv = document.getElementById("horror-q6-container");
-const actionDiv = document.getElementById("action-q6-container");
-
-//Working to fetch genre
-const movieTitle = document.getElementById("title");
-const posterImg = document.getElementById(`poster`);
-const overviewSection = document.getElementById("overview");
-//YT API
-const videoFrame = document.querySelector("iframe");
 
 document
   .getElementById("romance-1")
@@ -148,6 +136,18 @@ document
   .getElementById("action-6")
   .addEventListener("click", () => (nextSix.disabled = false));
 
+
+// Variables
+let romanceCount = 0;
+let comedyCount = 0;
+let horrorCount = 0;
+let actionCount = 0;
+let countArr = [];
+let genreId = 0;
+let genreCount = 0;
+
+
+
 // Event Listener to Start Quiz
 startButton.addEventListener("click", (e) => {
   e.preventDefault();
@@ -206,7 +206,6 @@ nextThree.addEventListener("click", (e) => {
   q4Contain.style.display = "block";
   for (const answChoice3 of answChoices3) {
     if (answChoice3.checked) {
-      // console.log(answChoice3.id);
       answChoice3.id == "romance-3"
         ? romanceCount++
         : answChoice3.id == "comedy-3"
@@ -251,10 +250,6 @@ nextFive.addEventListener("click", (e) => {
         : answChoice5.id == "horror-5"
         ? horrorCount++
         : actionCount++;
-      console.log(romanceCount);
-      console.log(comedyCount);
-      console.log(horrorCount);
-      console.log(actionCount);
       break;
     }
   }
@@ -267,7 +262,6 @@ nextFive.addEventListener("click", (e) => {
   console.log(countArr);
   if (countArr.length === 1) {
     q5Contain.style.display = "none";
-    console.log(
       romanceCount === genreCount
         ? (genreId = 10749)
         : comedyCount == genreCount
@@ -275,21 +269,16 @@ nextFive.addEventListener("click", (e) => {
         : horrorCount == genreCount
         ? (genreId = 27)
         : (genreId = 28)
-    );
+    ;
     fetchMovie(genreId);
     analysis(genreId);
   } else {
-    console.log("Break this Tie");
     q5Contain.style.display = "none";
     q6Contain.style.display = "block";
   }
-  checkTies(genreCount)
+  checkTies(genreCount);
 });
 
-function hide(id1, id2) {
-  id1.style.display = "none";
-  id2.style.display = "none";
-}
 
 nextSix.addEventListener("click", (e) => {
   e.preventDefault();
@@ -322,7 +311,7 @@ nextSix.addEventListener("click", (e) => {
   );
   q6Contain.style.display = "none";
   fetchMovie(genreId);
-  analysis(genreId)
+  analysis(genreId);
 });
 
 const options = {
@@ -352,10 +341,8 @@ async function getRandomMovie(genreId) {
       );
       let movieApiJson = await movieApi.json();
       let dataInfo = await movieApiJson;
-      console.log(dataInfo);
       let randomMovie;
       let randomAmount = Math.floor(Math.random() * dataInfo.results.length);
-      console.log(randomAmount);
       //Display the random movies only > 7 and more than 500 votes
       for (let i = 0; i < randomAmount + 1; i++) {
         if (
@@ -387,6 +374,7 @@ async function getRandomMovie(genreId) {
   }
 }
 
+//fetching movie top genre to display for User logic
 async function fetchMovie(genreId) {
   getRandomMovie(genreId);
   let response = await fetch(
@@ -407,7 +395,6 @@ async function fetchMovie(genreId) {
       movieData = data.results[i];
     }
   }
-  console.log(movieData);
   let posterPath = movieData.poster_path;
   console.log(posterImg);
   posterImg.src = `https://image.tmdb.org/t/p/original${posterPath}`;
@@ -433,15 +420,12 @@ async function fetchMovie(genreId) {
   );
   let videoJson = await videoYt.json();
   let videoData = await videoJson;
-  console.log(videoData);
-  console.log(videoData.contents);
   let videoLink = await videoData.contents[0].video.videoId;
   videoFrame.src = `https://www.youtube.com/embed/${videoLink}`;
-  videoFrame.style.cssText =
-  `height:600px;
+  videoFrame.style.cssText = `height:600px;
   width:800px;
   border: 3px solid black;
-  `
+  `;
   randomMovieButton.innerText = "New Flick";
   randomMovieButton.style.cssText = `font-size: 12px; 
           background-color: white;
@@ -456,12 +440,12 @@ async function fetchMovie(genreId) {
         `;
 }
 
+//psychoanalysis text 
 function analysis(genreId) {
   modal.style.display = "block";
   if (genreId == 10479) {
     psychoanalysis.innerText =
       "You're a romantic at heart, chasing love where you see it and if you don't see it you create it. We have the just film for your romantic tendencies.";
-    console.log(psychoanalysis);
   } else if (genreId == 35) {
     psychoanalysis.innerText =
       "A comic in every room you're in, you make the ones around you laugh, sparking joy everywhere you go. At times, you are a bit immature but no one takes it to heart when the jokes are good, we have the film guaranteed to make you laugh.";
@@ -474,38 +458,41 @@ function analysis(genreId) {
   }
 }
 
-
+//For Modal PopUp
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
+span.onclick = function () {
   modal.style.display = "none";
-}
+};
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
+window.onclick = function (e) {
+  if (e.target === modal) {
     modal.style.display = "none";
   }
+};
+
+//TieBreak logic
+function checkTies(genreCount) {
+  romanceCount === genreCount && comedyCount === genreCount
+    ? hide(horrorDiv, actionDiv)
+    : 
+    romanceCount === genreCount && horrorCount === genreCount
+    ? hide(comedyDiv, actionDiv)
+    :
+    romanceCount === genreCount && actionCount === genreCount
+    ? hide(comedyDiv, horrorDiv)
+    :
+    comedyCount === genreCount && horrorCount === genreCount
+    ? hide(romanceDiv, actionDiv)
+    :
+    comedyCount === genreCount && actionCount === genreCount
+    ? hide(romanceDiv, horrorDiv)
+    :
+      // (horrorCount === genreCount && actionCount === genreCount) ?
+      hide(romanceDiv, comedyDiv);
 }
 
-function checkTies(genreCount){
-    (romanceCount === genreCount && comedyCount === genreCount) ?
-      hide(horrorDiv, actionDiv) :
-    //Romance and Horror Tie
-    (romanceCount === genreCount && horrorCount === genreCount) ?
-      hide(comedyDiv, actionDiv):
-    
-    //Romance and Action Tie
-    (romanceCount === genreCount && actionCount === genreCount) ?
-      hide(comedyDiv, horrorDiv):
-  
-    //Comedy and Horror Tie
-    (comedyCount === genreCount && horrorCount === genreCount) ?
-      hide(romanceDiv, actionDiv):
-    
-    //Comedy and Action Tie
-    (comedyCount === genreCount && actionCount === genreCount) ?
-      hide(romanceDiv, horrorDiv):
-    //Horror and Action Tie
-    // (horrorCount === genreCount && actionCount === genreCount) ?
-      hide(romanceDiv, comedyDiv)
+function hide(id1, id2) {
+  id1.style.display = "none";
+  id2.style.display = "none";
 }
