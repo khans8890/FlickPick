@@ -283,31 +283,7 @@ nextFive.addEventListener("click", (e) => {
     q5Contain.style.display = "none";
     q6Contain.style.display = "block";
   }
-  //Romance and Comedy Tie
-  if (romanceCount === genreCount && comedyCount === genreCount) {
-    hide(horrorDiv, actionDiv);
-    //hide opposite
-  }
-  //Romance and Horror Tie
-  if (romanceCount === genreCount && horrorCount === genreCount) {
-    hide(comedyDiv, actionDiv);
-  }
-  //Romance and Action Tie
-  if (romanceCount === genreCount && actionCount === genreCount) {
-    hide(comedyDiv, horrorDiv);
-  }
-  //Comedy and Horror Tie
-  if (comedyCount === genreCount && horrorCount === genreCount) {
-    hide(romanceDiv, actionDiv);
-  }
-  //Comedy and Action Tie
-  if (comedyCount === genreCount && actionCount === genreCount) {
-    hide(romanceDiv, horrorDiv);
-  }
-  //Horror and Action Tie
-  if (horrorCount === genreCount && actionCount === genreCount)
-    hide(romanceDiv, comedyDiv);
-  // console.log("Horror","Action")​
+  checkTies(genreCount)
 });
 
 function hide(id1, id2) {
@@ -509,4 +485,27 @@ window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
+}
+
+function checkTies(genreCount){
+    (romanceCount === genreCount && comedyCount === genreCount) ?
+      hide(horrorDiv, actionDiv) :
+    //Romance and Horror Tie
+    (romanceCount === genreCount && horrorCount === genreCount) ?
+      hide(comedyDiv, actionDiv):
+    
+    //Romance and Action Tie
+    (romanceCount === genreCount && actionCount === genreCount) ?
+      hide(comedyDiv, horrorDiv):
+  
+    //Comedy and Horror Tie
+    (comedyCount === genreCount && horrorCount === genreCount) ?
+      hide(romanceDiv, actionDiv):
+    
+    //Comedy and Action Tie
+    (comedyCount === genreCount && actionCount === genreCount) ?
+      hide(romanceDiv, horrorDiv):
+    //Horror and Action Tie
+    // (horrorCount === genreCount && actionCount === genreCount) ?
+      hide(romanceDiv, comedyDiv)
 }
