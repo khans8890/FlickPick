@@ -55,8 +55,8 @@ ___
 
 Developer: Evan 
 
-* LinkedIn: 
-* Github: 
+* LinkedIn: https://www.linkedin.com/in/evan-lu-/
+* Github: https://github.com/evanlu1134
 
 ___
 
