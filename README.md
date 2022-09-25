@@ -25,10 +25,38 @@ There are unlimited amounts of movie options which may cause an user to be lost 
 ___
 
 MVP:
-
-Fetch data from TMDB API.
-User given prompts and picks their genre related answers(i.e. Action, Comedy). 
-User's result are presented with 1 movie genre that matches their taste.
-The Movie information is displayed(i.e. Title, Rating).
+* Fetch data from TMDB API.
+* User given prompts and picks their genre related answers(i.e. Action, Comedy). 
+* User's result are presented with 1 movie genre that matches their taste.
+* The Movie information is displayed(i.e. Title, Rating).
 
 ___
+
+Quick Demo:
+
+___
+
+Contact:
+
+* Product Manager and Developer: Sumaira 
+
+* LinkedIn:  
+* Contact:
+
+___
+
+Developer: Richard
+
+* LinkedIn: 
+* Github: 
+* Contact:
+
+___
+
+Developer: Evan 
+
+* LinkedIn: 
+* Github: 
+
+___
+
