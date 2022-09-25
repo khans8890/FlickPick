@@ -350,10 +350,6 @@ h4 {
     padding-top: 100px;
 }
 
-.options2 {
-    font-size: 20px;
-    margin-left: 30px;
-}
 
 .options2:hover {
     background-color: rgba(255, 255, 255, .4);
@@ -397,10 +393,6 @@ h4 {
     padding-top: 100px;
 }
 
-.options3 {
-    font-size: 20px;
-    margin-left: 30px;
-}
 
 .options3:hover {
     background-color: rgba(255, 255, 255, .4);
@@ -441,11 +433,6 @@ h4 {
     font-size: 35px;
     text-align: center;
     padding-top: 100px;
-}
-
-.options4 {
-    font-size: 20px;
-    margin-left: 30px;
 }
 
 .options4:hover {
@@ -489,12 +476,6 @@ h4 {
     padding-top: 100px;
 }
 
-.options5 {
-    font-size: 20px;
-    margin-left: 30px;
-
-}
-
 .options5:hover {
     background-color: rgba(255, 255, 255, .4);
 }
@@ -536,11 +517,6 @@ h4 {
     font-size: 35px;
     text-align: center;
     padding-top: 100px;
-}
-
-.options6 {
-    font-size: 20px;
-    margin-left: 30px;
 }
 
 .options6:hover {
