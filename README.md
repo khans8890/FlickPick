@@ -34,6 +34,8 @@ ___
 
 Quick Demo:
 
+![FlickPicker](https://user-images.githubusercontent.com/96028977/192176515-013c82f6-fef9-4549-aefd-9b9131316697.gif)
+
 ___
 
 Contact:
