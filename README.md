@@ -38,14 +38,15 @@ Quick Demo:
 
 ___
 
-Contact:
 
 * Product Manager and Developer: Sumaira 
 
-* LinkedIn:  
-* Contact:
+***Contact:*** 
+* LinkedIn:  https://www.linkedin.com/in/sumaira-khan-7272531a3/
 
 ___
+
+***Contact:*** 
 
 Developer: Richard
 
@@ -54,6 +55,8 @@ Developer: Richard
 * Contact:
 
 ___
+
+***Contact:*** 
 
 Developer: Evan 
 
